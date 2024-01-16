@@ -21,7 +21,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 xs:px-6 flex justify-between w-full lightTheme">
+      <nav className="fixed h-20 sm:h-24 p-2 xs:p-4 sm:px-6 flex justify-between w-full lightTheme">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
             <NavHeader menuOpen={false} />
@@ -74,65 +74,65 @@ function Navbar() {
             Calendar
           </Link>
         </div>
-        <div className="md:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
+        <div className="md:hidden" onClick={() => setIsMenuOpen(true)}>
           <Menu size={50} />
         </div>
       </nav>
       {isMenuOpen && (
         <div className="fixed md:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
-          <div className="h-24 p-4 xs:px-6 flex justify-between w-full">
+          <div className="h-20 sm:h-24 p-2 xs:p-4 flex justify-between w-full">
             <NavHeader menuOpen={true} />
-            <div className="flex justify-end pt-2">
+            <div className="flex justify-end">
               <X size={50} className="stroke-white" onClick={closeMenu} />
             </div>
           </div>
 
           {/* menu on mobile */}
-          <div className="p-6 pt-0">
-            <ul className="text-5xl text-white grid gap-3 w-min">
-              <Link
-                to="home"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                Home
-              </Link>
-              <Link
-                to="about"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                About
-              </Link>
-              <Link
-                to="music"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                Music
-              </Link>
-              <Link
-                to="gallery"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                Gallery
-              </Link>
-              <Link
-                to="calendar"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                Calendar
-              </Link>
-            </ul>
-          </div>
+
+          <ul className="p-2 xs:p-4 text-5xl text-white grid gap-3 w-min">
+            <Link
+              to="home"
+              offset={-100}
+              className="hover:underline"
+              onClick={clickLink}
+            >
+              Home
+            </Link>
+            <Link
+              to="about"
+              offset={-100}
+              className="hover:underline"
+              onClick={clickLink}
+            >
+              About
+            </Link>
+            <Link
+              to="music"
+              offset={-100}
+              className="hover:underline"
+              onClick={clickLink}
+            >
+              Music
+            </Link>
+            <Link
+              to="gallery"
+              offset={-100}
+              className="hover:underline"
+              onClick={clickLink}
+            >
+              Gallery
+            </Link>
+            <Link
+              to="calendar"
+              offset={-100}
+              className="hover:underline"
+              onClick={clickLink}
+            >
+              Calendar
+            </Link>
+          </ul>
+
           <div className="absolute bottom-4 w-full px-8">
             <div className="flex justify-between gap-4">
               <SoMe face={true} size={50} />

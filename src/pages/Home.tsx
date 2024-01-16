@@ -32,9 +32,9 @@ function Home({ id }: { id: string }) {
     <div className="h-screen border border-black" id={id}>
       {/* <img src={homeImage} alt="" className="my-4 sm:hidden" /> */}
       <h1>Home</h1>
-      <div className="">
+      {/* <div className="">
         <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
-      </div>
+      </div> */}
     </div>
   );
 }

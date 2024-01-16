@@ -2,11 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors: {
-      primary: "#6e36c2", // change theses colors to match your brand colors
-      white: "#ffff",
+    extend: {
+      screens: {
+        xs: "380px",
+      },
+      colors: {
+        primary: "#6e36c2",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };

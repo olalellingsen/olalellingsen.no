@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
 
-// import logo from "../assets/logo.png";
 import { Link } from "react-scroll";
 import SoMe from "./SoMe";
+import NavHeader from "./NavHeader";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,18 +21,13 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-white">
+      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
-            <img
-              // src={logo}
-              alt="logo"
-              className="w-16 hover:scale-105 hover:cursor-pointer transition-transform"
-            />
+            <NavHeader menuOpen={false} />
           </Link>
-          <h1 className="pt-3.5 px-4 hidden lg:flex">My Template</h1>
         </div>
-        <div className="hidden sm:flex gap-8 p-4 text-lg">
+        <div className="hidden md:flex gap-8 p-4 text-lg">
           <Link
             to="home"
             smooth={true}
@@ -79,15 +74,15 @@ function Navbar() {
             Contact
           </Link>
         </div>
-        <div className="sm:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
+        <div className="md:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
           <Menu size={50} />
         </div>
       </nav>
       {isMenuOpen && (
-        <div className="fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary">
+        <div className="fixed md:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
-          <div className="h-24 p-4 flex justify-between w-full">
-            <img alt="logo" src="" className="w-16" /> {/* src={logo} */}
+          <div className="h-24 p-4 sm:px-6  flex justify-between w-full">
+            <NavHeader menuOpen={true} />
             <div className="flex justify-end pt-2">
               <X size={50} className="stroke-white" onClick={closeMenu} />
             </div>
@@ -95,7 +90,7 @@ function Navbar() {
 
           {/* menu on mobile */}
           <div className="p-6 pt-0">
-            <ul className="text-5xl text-white grid gap-3">
+            <ul className="text-5xl text-white grid gap-3 w-min">
               <Link
                 to="home"
                 offset={-100}

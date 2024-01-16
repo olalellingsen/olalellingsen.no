@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+  @apply bg-primary rounded-lg shadow-xl text-white p-4;
+}
+
+h1 {
+  @apply text-3xl text-center;
+}
+
+h2 {
+  @apply text-2xl font-light;
+}
+
+.navLink {
+  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary mb-1;
+}
+
+.soMeIcon {
+  @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
+}
+
+p {
+  @apply text-lg;
+}
+
+.album {
+  @apply w-full;
+}
+
+.single {
+  @apply w-full;
+}

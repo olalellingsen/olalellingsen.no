@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.lightTheme {
+  @apply bg-stone-200;
+}
+
+.darkTheme {
+  @apply bg-slate-900 text-slate-200;
+}
+
 .card {
   @apply bg-primary rounded-lg shadow-xl text-white p-4;
 }

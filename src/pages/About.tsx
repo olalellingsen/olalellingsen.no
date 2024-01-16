@@ -36,7 +36,7 @@ function About({ id }: { id: string }) {
   // }, [imagesRef]); // Dependency on imagesRef to re-fetch data when the image changes
 
   return (
-    <div className="h-screen border" id={id}>
+    <div className="h-screen border border-black" id={id}>
       <h1>About</h1>
       <div className="pt-4 grid gap-4 mx-auto md:w-4/5 xl:w-2/3">
         <img src={imageUrl} alt="About picture" />

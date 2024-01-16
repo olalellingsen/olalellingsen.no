@@ -21,7 +21,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full">
+      <nav className="fixed h-24 p-4 xs:px-6 flex justify-between w-full lightTheme">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
             <NavHeader menuOpen={false} />
@@ -56,6 +56,15 @@ function Navbar() {
             Music
           </Link>
           <Link
+            to="gallery"
+            smooth={true}
+            duration={800}
+            offset={-100}
+            className="navLink"
+          >
+            Gallery
+          </Link>
+          <Link
             to="calendar"
             smooth={true}
             duration={800}
@@ -63,15 +72,6 @@ function Navbar() {
             className="navLink"
           >
             Calendar
-          </Link>
-          <Link
-            to="footer"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Contact
           </Link>
         </div>
         <div className="md:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
@@ -81,7 +81,7 @@ function Navbar() {
       {isMenuOpen && (
         <div className="fixed md:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
-          <div className="h-24 p-4 sm:px-6  flex justify-between w-full">
+          <div className="h-24 p-4 xs:px-6 flex justify-between w-full">
             <NavHeader menuOpen={true} />
             <div className="flex justify-end pt-2">
               <X size={50} className="stroke-white" onClick={closeMenu} />
@@ -116,20 +116,20 @@ function Navbar() {
                 Music
               </Link>
               <Link
+                to="gallery"
+                offset={-100}
+                className="hover:underline"
+                onClick={clickLink}
+              >
+                Gallery
+              </Link>
+              <Link
                 to="calendar"
                 offset={-100}
                 className="hover:underline"
                 onClick={clickLink}
               >
                 Calendar
-              </Link>
-              <Link
-                to="footer"
-                offset={-100}
-                className="hover:underline"
-                onClick={clickLink}
-              >
-                Contact
               </Link>
             </ul>
           </div>

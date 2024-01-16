@@ -1,15 +1,13 @@
-import React from "react";
-
 function NavHeader({ menuOpen }: { menuOpen: boolean }) {
   return (
     <div className="hover:cursor-pointer">
       <h1
-        className={`hidden sm:flex ${menuOpen ? "text-white" : "text-primary"}`}
+        className={`hidden xs:flex ${menuOpen ? "text-white" : "text-primary"}`}
       >
         Ola Lømo Ellingsen
       </h1>
       <h2
-        className={`sm:hidden font-normal ${
+        className={`xs:hidden font-normal ${
           menuOpen ? "text-white" : "text-primary"
         }`}
       >

@@ -133,11 +133,12 @@ function Navbar() {
             </Link>
           </ul>
 
-          <div className="absolute bottom-4 w-full px-8">
-            <div className="flex justify-between gap-4">
+          <div className="absolute bottom-4 w-full px-4 xs:px-8 sm:px-20">
+            <div className="flex justify-between gap-2">
               <SoMe face={true} size={50} />
               <SoMe insta={true} size={50} />
-              <SoMe yt={true} size={50} />
+              <SoMe linkedin={true} size={50} />
+              <SoMe spotify={true} size={50} />
             </div>
           </div>
         </div>

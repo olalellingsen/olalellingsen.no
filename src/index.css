@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .lightTheme {
-  @apply bg-stone-200;
+  @apply bg-stone-200 text-stone-800;
 }
 
 .darkTheme {
@@ -23,7 +23,7 @@ h2 {
 }
 
 .navLink {
-  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary mb-1;
+  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary mb-1 hover:text-stone-600 transition-all ease-in-out;
 }
 
 .soMeIcon {

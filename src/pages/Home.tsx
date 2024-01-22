@@ -29,7 +29,7 @@ function Home({ id }: { id: string }) {
   // }, [img]); // Dependency on img to re-fetch data when the image changes
 
   return (
-    <div className="h-screen border border-black" id={id}>
+    <div className="" id={id}>
       {/* <img src={homeImage} alt="" className="my-4 sm:hidden" /> */}
       <h1>Home</h1>
       {/* <div className="">

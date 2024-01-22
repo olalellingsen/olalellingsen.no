@@ -2,7 +2,7 @@ import React from "react";
 
 function Gallery({ id }: { id: string }) {
   return (
-    <div id="gallery" className="h-screen border border-black">
+    <div id="gallery" className="">
       <h1>Gallery</h1>
     </div>
   );

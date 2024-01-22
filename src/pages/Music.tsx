@@ -34,7 +34,7 @@ function Music({ id }: { id: string }) {
   }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
 
   return (
-    <div id={id} className="h-screen border border-black grid gap-2">
+    <div id={id} className="grid gap-2">
       {/* Albums */}
       <h1>Music</h1>
       <h2>Albums</h2>

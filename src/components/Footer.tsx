@@ -3,8 +3,8 @@ import SoMe from "./SoMe";
 
 function Footer({ id }: { id: string }) {
   return (
-    <div id={id} className="bg-primary text-white p-4 xs:p-6">
-      <div className="grid gap-4 xs:flex justify-between">
+    <div id={id} className="bg-primary text-white p-4">
+      <div className="grid gap-8 sm:flex justify-between p-2 sm:p-6 sm:px-12">
         {/* contact */}
         <div className="grid gap-2">
           <div className="flex gap-2 underline">
@@ -20,11 +20,11 @@ function Footer({ id }: { id: string }) {
         </div>
 
         {/* social media */}
-        <div className="grid gap-2">
-          <div className="flex gap-2">
-            <SoMe face={true} size={40} />
-            <SoMe insta={true} size={40} />
-          </div>
+        <div className="flex justify-between gap-2">
+          <SoMe face={true} size={40} />
+          <SoMe insta={true} size={40} />
+          <SoMe linkedin={true} size={40} />
+          <SoMe spotify={true} size={40} />
         </div>
       </div>
       <p className="text-center pt-8 font-extralight">

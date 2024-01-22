@@ -47,7 +47,12 @@ function SoMe({ face, insta, yt, size, linkedin, spotify }: Props) {
       {spotify && (
         <div>
           <a href="https://open.spotify.com/artist/4NZ0fCPxiuIaEHw9kUgURe?si=h5hKr1lfTt28PC1Nfn-3hw&nd=1&dlsi=0abc8c122fac4be6">
-            <img src={SpotifyIcon} alt="Spotify" className="soMeIcon" />
+            <img
+              src={SpotifyIcon}
+              alt="Spotify"
+              className="soMeIcon"
+              width={size}
+            />
           </a>
         </div>
       )}

@@ -8,6 +8,13 @@ import NavHeader from "./NavHeader";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuItems] = useState([
+    "Home",
+    "About",
+    "Projects",
+    "Music",
+    "Calendar",
+  ]);
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -16,7 +23,7 @@ function Navbar() {
   function clickLink() {
     setTimeout(() => {
       closeMenu();
-    }, 200); // Replace 1000 with the number of milliseconds you want to wait
+    }, 200);
   }
 
   return (
@@ -28,51 +35,18 @@ function Navbar() {
           </Link>
         </div>
         <div className="hidden md:flex gap-8 p-4 text-lg">
-          <Link
-            to="home"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Home
-          </Link>
-          <Link
-            to="about"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            About
-          </Link>
-          <Link
-            to="music"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Music
-          </Link>
-          <Link
-            to="gallery"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Gallery
-          </Link>
-          <Link
-            to="calendar"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Calendar
-          </Link>
+          {menuItems.map((item) => (
+            <Link
+              to={item}
+              smooth={true}
+              duration={800}
+              offset={-100}
+              className="navLink"
+              key={item}
+            >
+              {item}
+            </Link>
+          ))}
         </div>
         <div className="md:hidden" onClick={() => setIsMenuOpen(true)}>
           <Menu size={50} />
@@ -89,48 +63,18 @@ function Navbar() {
           </div>
 
           {/* menu on mobile */}
-
           <ul className="p-2 xs:p-4 text-5xl text-white grid gap-3 w-min">
-            <Link
-              to="home"
-              offset={-100}
-              className="hover:underline"
-              onClick={clickLink}
-            >
-              Home
-            </Link>
-            <Link
-              to="about"
-              offset={-100}
-              className="hover:underline"
-              onClick={clickLink}
-            >
-              About
-            </Link>
-            <Link
-              to="music"
-              offset={-100}
-              className="hover:underline"
-              onClick={clickLink}
-            >
-              Music
-            </Link>
-            <Link
-              to="gallery"
-              offset={-100}
-              className="hover:underline"
-              onClick={clickLink}
-            >
-              Gallery
-            </Link>
-            <Link
-              to="calendar"
-              offset={-100}
-              className="hover:underline"
-              onClick={clickLink}
-            >
-              Calendar
-            </Link>
+            {menuItems.map((item) => (
+              <Link
+                key={item}
+                to={item} // assuming your section IDs are lowercase
+                offset={-100}
+                className="hover:underline"
+                onClick={clickLink}
+              >
+                {item}
+              </Link>
+            ))}
           </ul>
 
           <div className="absolute bottom-4 w-full px-4 xs:px-8 sm:px-20">

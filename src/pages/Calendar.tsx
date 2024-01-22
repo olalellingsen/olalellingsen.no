@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 // import { db } from "../firebase";
-import Event, { ConcertProps } from "./Event";
+import Event, { ConcertProps } from "../components/Event";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
 interface Props {
@@ -83,7 +83,7 @@ function Concerts({ id }: Props) {
 
   return (
     <div id={id} className="h-screen border">
-      <h1>Events</h1>
+      <h1>Calendar</h1>
       <h2>Upcoming events</h2>
       <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
         {upcomingEvents.map((event) => (

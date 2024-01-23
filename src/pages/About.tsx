@@ -45,6 +45,7 @@ function About({ id }: { id: string }) {
 
   return (
     <div className="" id={id}>
+      <h1>About</h1>
       <div className="pt-4 grid gap-4 md:grid-cols-2">
         <img src={imageUrl} alt="About picture" />
         <div>

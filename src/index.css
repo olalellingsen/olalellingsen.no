@@ -41,7 +41,3 @@ p {
 .single {
   @apply w-full;
 }
-
-.project-card {
-  @apply p-1 hover:cursor-pointer hover:p-0.5 transition-all ease-in-out;
-}

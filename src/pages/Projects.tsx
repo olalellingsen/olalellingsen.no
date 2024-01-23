@@ -63,27 +63,40 @@ function Projects({ id }: { id: string }) {
   }, []);
 
   const handleToggleDetails = (artist: string) => {
-    setShowDetails((prevDetails) => ({
-      ...prevDetails,
-      [artist]: !prevDetails[artist],
-    }));
+    setShowDetails((prevDetails) => {
+      // Create a copy of the previous state
+      const newDetails = { ...prevDetails };
+
+      // Close details for all projects
+      Object.keys(newDetails).forEach((key) => {
+        newDetails[key] = false;
+      });
+
+      // Open details for the clicked project
+      newDetails[artist] = !prevDetails[artist];
+
+      return newDetails;
+    });
   };
 
   return (
-    <div id={id} className="">
+    <div id={id}>
       <h1>Projects</h1>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2 pt-4 md:pt-8">
         {projects.map((project, index) => (
-          <div key={index} className="project-card">
+          <div
+            key={index}
+            className="hover:text-primary transition-all ease-in-out"
+          >
             <h2 className="text-center">{project.artist}</h2>
             <img
-              className="shadow-xl"
+              className="hover:shadow-2xl transition-all ease-in-out cursor-pointer "
               src={project.imageUrl}
               alt={`Project ${index + 1}`}
               onClick={() => handleToggleDetails(project.artist)}
             />
             {showDetails[project.artist] && (
-              <div className="py-2">
+              <div className="py-2 text-black">
                 <p>{project.bio}</p>
                 {project.homepageUrl && (
                   <a

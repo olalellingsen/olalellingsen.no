@@ -71,7 +71,7 @@ function Projects({ id }: { id: string }) {
           <div key={index} className="project-card">
             <h2 className="text-center">{project.artist}</h2>
             <img
-              className="shadow-xl cursor-pointer"
+              className="shadow-xl"
               src={project.imageUrl}
               alt={`Project ${index + 1}`}
               onClick={() => handleToggleDetails(project.artist)}

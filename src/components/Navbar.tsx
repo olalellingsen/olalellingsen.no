@@ -28,7 +28,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-20 sm:h-24 p-2 xs:p-4 sm:px-6 flex justify-between w-full lightTheme">
+      <nav className="fixed h-16 xs:h-20 sm:h-24 p-2 xs:p-4 sm:px-6 flex justify-between w-full lightTheme">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
             <NavHeader menuOpen={false} />

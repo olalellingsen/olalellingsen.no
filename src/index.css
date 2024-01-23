@@ -41,3 +41,7 @@ p {
 .single {
   @apply w-full;
 }
+
+.project-card {
+  @apply p-2;
+}

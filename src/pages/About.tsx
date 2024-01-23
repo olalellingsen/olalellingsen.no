@@ -2,26 +2,35 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
+import { set } from "firebase/database";
 
 function About({ id }: { id: string }) {
-  const [bio, setBio] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
+  // Bio paragraphs
+  const [p1, setP1] = useState("");
+  const [p2, setP2] = useState("");
+  const [p3, setP3] = useState("");
 
-  // const storage = getStorage();
-  // const imagesRef = ref(storage, "about.jpg");
+  // Image
+  const [imageUrl, setImageUrl] = useState("");
+  const storage = getStorage();
+  const image = ref(storage, "about.jpg");
 
   // Fetch about text and image URL from database
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch text data from Firestore
-        const querySnapshot = await getDocs(collection(db, "Projects"));
-        const bioData = querySnapshot.docs.map((doc) => doc.data());
-        console.log(bioData);
+        const querySnapshot = await getDocs(collection(db, "About"));
+        const bioData = querySnapshot.docs.map((doc) => doc.data())[0];
+
+        // Set bio paragraphs
+        setP1(bioData.p1);
+        setP2(bioData.p2);
+        setP3(bioData.p3);
 
         // Fetch image URL from Firebase Storage
-        // const url = await getDownloadURL(imagesRef);
-        // setImageUrl(url);
+        const url = await getDownloadURL(image);
+        setImageUrl(url);
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
@@ -32,16 +41,17 @@ function About({ id }: { id: string }) {
 
     // Call the function to fetch data
     fetchData();
-  }, []); // Dependency on imagesRef to re-fetch data when the image changes
+  }, [image]); // Dependency on image to re-fetch data when the image changes
 
   return (
     <div className="" id={id}>
-      <h1>About</h1>
-      <div className="pt-4 grid gap-4 mx-auto md:w-4/5 xl:w-2/3">
+      <div className="pt-4 grid gap-4 md:grid-cols-2">
         <img src={imageUrl} alt="About picture" />
-        {/* <p>{bio1}</p>
-        <p>{bio2}</p>
-        <p>{bio3}</p> */}
+        <div>
+          <p className="py-1">{p1}</p>
+          <p className="py-1">{p2}</p>
+          <p className="py-1">{p3}</p>
+        </div>
       </div>
     </div>
   );

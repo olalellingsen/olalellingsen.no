@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
@@ -11,6 +11,7 @@ interface Project {
   homepageUrl: string;
   imgFileName: string;
   imageUrl: string;
+  leader: boolean;
 }
 
 function Projects({ id }: { id: string }) {
@@ -18,7 +19,6 @@ function Projects({ id }: { id: string }) {
   const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>(
     {}
   );
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -38,12 +38,18 @@ function Projects({ id }: { id: string }) {
           })
         );
 
-        // Set the projects state with image URLs
-        setProjects(projectsWithImages);
+        // Sort projects based on the 'leader' property
+        const sortedProjects = projectsWithImages.sort((a, b) => {
+          // Put projects with 'leader' set to true first
+          return a.leader === b.leader ? 0 : a.leader ? -1 : 1;
+        });
+
+        // Set the projects state with sorted and image URLs
+        setProjects(sortedProjects);
 
         // Initialize showDetails state for each project
         const initialShowDetails: { [key: string]: boolean } = {};
-        projectsWithImages.forEach((project) => {
+        sortedProjects.forEach((project) => {
           initialShowDetails[project.artist] = false;
         });
         setShowDetails(initialShowDetails);

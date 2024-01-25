@@ -3,50 +3,54 @@ import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Ticket } from "lucide-react";
 
-export interface ConcertProps {
-  title?: string;
+export interface EventProps {
+  band?: string;
   image?: string;
   date?: string;
   time?: string;
-  location?: string;
-  locationLink?: string;
+  venue?: string;
+  venueLink?: string;
   ticketLink?: string;
   description?: string;
+  isPast?: boolean;
 }
 
-function Concert({
-  title,
+function Event({
+  band,
   date,
   time,
-  location,
-  locationLink,
+  venue,
+  venueLink,
   description,
   ticketLink,
   image,
-}: ConcertProps) {
+  isPast,
+}: EventProps) {
   return (
-    <div className="card grid gap-2">
-      <h2 className="flex justify-start">{title}</h2>
-      <div className="grid sm:grid-cols-2 gap-4">
+    <div
+      className={`card grid gap-2 ${isPast ? "bg-primary/70 " : "bg-primary"}`}
+    >
+      <h2 className="flex">{band}</h2>
+      <div className="grid gap-4">
         {image !== undefined && (
-          <img src={image} alt={"Image of " + title} className="rounded-md" />
+          <img src={image} alt={"Image of " + band} className="rounded-md" />
         )}
-        <div className="flex flex-wrap gap-4 sm:mt-0 md:flex-col">
+        <div className="flex flex-wrap gap-4">
           <div className="flex gap-1">
             <Calendar />
             {date}
           </div>
           <div className="flex gap-1">
             <Clock />
-            {time}
+            {time === "00:00" ? "TBA" : time}
           </div>
           <div className="flex gap-1">
             <MapPin />
             <a
-              className={locationLink !== " " ? "underline" : ""}
-              href={locationLink}
+              className={venueLink !== undefined ? "underline" : ""}
+              href={venueLink}
             >
-              {location}
+              {venue}
             </a>
           </div>
 
@@ -65,4 +69,4 @@ function Concert({
   );
 }
 
-export default Concert;
+export default Event;

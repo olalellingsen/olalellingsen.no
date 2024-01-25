@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
-// import { db } from "../firebase";
-import Event, { ConcertProps } from "../components/Event";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { db } from "../firebase";
+import Event, { EventProps } from "../components/Event";
+import { ArrowRight } from "lucide-react";
 
 interface Props {
   id: string;
 }
 
-function Concerts({ id }: Props) {
+function Calendar({ id }: Props) {
   const [eventData, setEventData] = useState<DocumentData[]>([]);
-  const [upcomingEvents, setUpcomingEvents] = useState<ConcertProps[]>([]);
-  const [pastEvents, setPastEvents] = useState<ConcertProps[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<EventProps[]>([]);
+  const [pastEvents, setPastEvents] = useState<EventProps[]>([]);
   const [showPast, setShowPast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const querySnapshot = await getDocs(collection(db, "Concerts"));
-        // const newConcertData = querySnapshot.docs.map((doc) =>
-        //   doc.data()
-        // ) as DocumentData[];
-        // setConcertData(newConcertData);
+        const querySnapshot = await getDocs(collection(db, "Concerts"));
+        const concertData = querySnapshot.docs.map((doc) =>
+          doc.data()
+        ) as DocumentData[];
+        setEventData(concertData);
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
@@ -31,95 +31,91 @@ function Concerts({ id }: Props) {
     };
 
     fetchData();
-  }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
+  }, [id]);
 
   useEffect(() => {
     filterConcertData();
-  }, [eventData]); // Update the filtered data whenever eventData changes
+  }, [eventData]);
 
   function filterConcertData() {
-    const today = new Date();
+    const currentDate = new Date();
 
-    const upcomingEvents = eventData
-      .sort((a, b) => {
-        const aDate = new Date(a.date.toDate());
-        const bDate = new Date(b.date.toDate());
-        return aDate.getTime() - bDate.getTime(); // Sort by nearest date
-      })
-      .filter((event) => {
-        const eventDate = new Date(event.date.toDate());
-        return eventDate > today;
-      })
-      .map((event) => ({
-        title: event.title.toString(),
-        date: event.date.toDate().toLocaleDateString(),
-        time: event.date.toDate().toLocaleTimeString().slice(0, -3),
-        location: event.location,
-        locationLink: event.locationLink,
-        ticketLink: event.ticketLink,
-        description: event.description,
-      }));
+    const allEvents = eventData.map((event) => ({
+      band: event.band.toString(),
+      date: event.date.toDate(),
+      venue: event.venue,
+      venueLink: event.venueLink,
+      ticketLink: event.ticketLink,
+      description: event.description,
+    }));
 
-    const pastEvents = eventData
-      .sort((a, b) => {
-        const aDate = new Date(a.date.toDate());
-        const bDate = new Date(b.date.toDate());
-        return bDate.getTime() - aDate.getTime(); // Sort in most recent order
-      })
-      .filter((event) => {
-        const eventDate = new Date(event.date.toDate());
-        return eventDate < today;
-      })
-      .map((event) => ({
-        title: event.title,
-        date: event.date.toDate().toLocaleDateString(),
-        location: event.location,
-      }));
+    const upcomingEventsData = allEvents.filter(
+      (event) => event.date > currentDate
+    );
+    const pastEventsData = allEvents.filter(
+      (event) => event.date <= currentDate
+    );
 
-    // Set the state variables
-    setUpcomingEvents(upcomingEvents);
-    setPastEvents(pastEvents);
+    // Sort upcoming events by date in ascending order
+    const sortedUpcomingEventsData = upcomingEventsData.sort(
+      (a, b) => a.date - b.date
+    );
+    // Sort past events by date in descending order
+    const sortedPastEventsData = pastEventsData.sort((a, b) => b.date - a.date);
+
+    const formattedUpcomingEvents = sortedUpcomingEventsData.map((event) => ({
+      ...event,
+      date: event.date.toLocaleDateString(),
+      time: event.date.toLocaleTimeString().slice(0, -3),
+    }));
+
+    const formattedPastEvents = sortedPastEventsData.map((event) => ({
+      ...event,
+      date: event.date.toLocaleDateString(),
+      time: event.date.toLocaleTimeString().slice(0, -3),
+    }));
+
+    setUpcomingEvents(formattedUpcomingEvents);
+    setPastEvents(formattedPastEvents);
   }
 
   return (
-    <div id={id} className="h-screen border">
+    <div id={id} className="lg:w-2/3 mx-auto">
       <h1>Calendar</h1>
-      <h2>Upcoming events</h2>
-      <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
-        {upcomingEvents.map((event) => (
-          <Event {...event} />
-        ))}
-      </div>
-      <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
-        <button onClick={() => setShowPast(!showPast)} className="flex">
-          {showPast ? (
-            <>
-              <h2 className="underline">Past events</h2>
-              <ArrowDown height={35} />
-            </>
-          ) : (
-            <>
-              <h2 className="flex underline hover:mr-1">Show past events</h2>
-              <ArrowRight height={35} />
-            </>
-          )}
+      <div className="flex justify-between py-2">
+        {showPast ? <h2>Past concerts</h2> : <h2>Upcoming concerts</h2>}
+        <button
+          onClick={() => setShowPast(!showPast)}
+          className="underline flex"
+        >
+          {showPast ? <h2>Show upcoming dates</h2> : <h2>Show past dates</h2>}
         </button>
-        {showPast && (
-          <ul className="pt-2">
-            {pastEvents.map((event) => (
-              <li>
-                <div className="flex py-1">
-                  <p>
-                    {event.date} - {event.title} - {event.location}
-                  </p>
-                </div>
-              </li>
+      </div>
+      {!showPast && (
+        <div>
+          <div className="grid gap-4">
+            {upcomingEvents.map((event) => (
+              <Event {...event} />
             ))}
-          </ul>
+          </div>
+        </div>
+      )}
+      <div>
+        {showPast && (
+          <div className="grid gap-4">
+            {pastEvents.map((event) => (
+              <Event
+                band={event.band}
+                date={event.date}
+                venue={event.venue}
+                isPast={true}
+              />
+            ))}
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-export default Concerts;
+export default Calendar;

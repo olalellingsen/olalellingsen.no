@@ -11,7 +11,7 @@
 }
 
 .card {
-  @apply bg-primary rounded-lg shadow-xl text-white p-4;
+  @apply rounded-lg shadow-xl text-white p-4;
 }
 
 h1 {

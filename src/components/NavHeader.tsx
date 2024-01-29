@@ -7,13 +7,13 @@ function NavHeader({ menuOpen }: { menuOpen: boolean }) {
         Ola Lømo Ellingsen
       </h1>
       <h2
-        className={`xs:hidden font-normal ${
+        className={`xs:hidden p-0 font-normal ${
           menuOpen ? "text-white" : "text-primary"
         }`}
       >
         Ola Lømo Ellingsen
       </h2>
-      <h3 className={`font-thin text-sm ${menuOpen ? "text-white" : ""}`}>
+      <h3 className={`font-thin p-0 text-sm ${menuOpen ? "text-white" : ""}`}>
         Trumpet player | Composer
       </h3>
     </div>

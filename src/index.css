@@ -15,11 +15,15 @@
 }
 
 h1 {
-  @apply text-3xl text-center;
+  @apply text-3xl text-center py-1;
 }
 
 h2 {
-  @apply text-2xl font-light;
+  @apply text-2xl font-light py-1;
+}
+
+h3 {
+  @apply text-xl font-light py-1;
 }
 
 .navLink {
@@ -30,7 +34,8 @@ h2 {
   @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
 }
 
-p {
+p,
+li {
   @apply text-lg;
 }
 

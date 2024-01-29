@@ -8,6 +8,7 @@ interface Project {
   artist: string;
   bio: string;
   albums: string[];
+  members: string[];
   homepageUrl: string;
   imgFileName: string;
   imageUrl: string;
@@ -82,7 +83,7 @@ function Projects() {
           (project) => project.artist === artist
         );
 
-        if (selectedProjectIndex !== -1) {
+        if (selectedProjectIndex !== -1 && window.innerWidth > 640) {
           const selectedProject = updatedProjects.splice(
             selectedProjectIndex,
             1
@@ -93,8 +94,10 @@ function Projects() {
         return updatedProjects;
       });
 
-      // Scroll to the top of the page
-      window.scrollTo({ top: 0, behavior: "auto" });
+      // Scroll to the top of the page on large screens
+      if (window.innerWidth > 640) {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
 
       return newDetails;
     });
@@ -118,16 +121,47 @@ function Projects() {
               alt={`Project ${index + 1}`}
               onClick={() => handleToggleDetails(project.artist)}
             />
+
+            {/* Show details */}
             {showDetails[project.artist] && (
-              <div className="py-2 text-black">
+              <div className="grid gap-4 py-2 text-black">
                 <p>{project.bio}</p>
+                {project.members && (
+                  <div>
+                    <h3>Members</h3>
+                    <ul>
+                      {project.members.map((member, index) => (
+                        <li key={index}>{member}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* {project.albums && (
+                  <div>
+                    <h3>Music</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {project.albums.map((album, index) => (
+                        <iframe
+                          key={index}
+                          src={album}
+                          width="100%"
+                          height="352"
+                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                          loading="lazy"
+                        ></iframe>
+                      ))}
+                    </div>
+                  </div>
+                )} */}
+
                 {project.homepageUrl && (
                   <a
                     target="_blank"
                     className="flex underline gap-1"
                     href={project.homepageUrl}
                   >
-                    <p>Read more</p>
+                    <p>Read more about {project.artist}</p>
                     <ExternalLink className="inline-block pt-1" />
                   </a>
                 )}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { InstagramEmbed } from "react-social-media-embed";
 
-function Home({ id }: { id: string }) {
+function Home() {
   const [homeImage, setHomeImage] = useState("");
 
   const storage = getStorage();
@@ -29,7 +29,7 @@ function Home({ id }: { id: string }) {
   }, [img]); // Dependency on img to re-fetch data when the image changes
 
   return (
-    <div className="" id={id}>
+    <div className="">
       <img src={homeImage} alt="HomeImage" className="" />
       {/* <div className="">
         <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />

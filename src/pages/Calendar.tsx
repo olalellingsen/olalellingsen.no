@@ -2,13 +2,9 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Event, { EventProps } from "../components/Event";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-interface Props {
-  id: string;
-}
-
-function Calendar({ id }: Props) {
+function Calendar() {
   const [eventData, setEventData] = useState<DocumentData[]>([]);
   const [upcomingEvents, setUpcomingEvents] = useState<EventProps[]>([]);
   const [pastEvents, setPastEvents] = useState<EventProps[]>([]);
@@ -31,7 +27,7 @@ function Calendar({ id }: Props) {
     };
 
     fetchData();
-  }, [id]);
+  });
 
   useEffect(() => {
     filterConcertData();
@@ -80,17 +76,24 @@ function Calendar({ id }: Props) {
   }
 
   return (
-    <div id={id} className="lg:w-2/3 mx-auto">
-      <h1>Calendar</h1>
-      <div className="flex justify-between py-2">
-        {showPast ? <h2>Past concerts</h2> : <h2>Upcoming concerts</h2>}
-        <button
-          onClick={() => setShowPast(!showPast)}
-          className="underline flex"
-        >
-          {showPast ? <h2>Show upcoming dates</h2> : <h2>Show past dates</h2>}
+    <div className="lg:w-2/3 mx-auto">
+      {showPast ? (
+        <h1 className="p-2">Past concerts</h1>
+      ) : (
+        <h1 className="p-2">Upcoming concerts</h1>
+      )}
+      <div className="flex justify-center xl:justify-end py-4">
+        <button onClick={() => setShowPast(!showPast)} className="button flex">
+          {showPast ? (
+            <>
+              <h2>Upcoming dates</h2>
+            </>
+          ) : (
+            <h2>Past dates</h2>
+          )}
         </button>
       </div>
+
       {!showPast && (
         <div>
           <div className="grid gap-4">

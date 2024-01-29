@@ -1,9 +1,9 @@
 import { Mail, Phone } from "lucide-react";
 import SoMe from "./SoMe";
 
-function Footer({ id }: { id: string }) {
+function Footer() {
   return (
-    <div id={id} className="bg-primary text-white p-4">
+    <div className="bg-primary text-white p-4">
       <div className="grid gap-8 sm:flex justify-between p-2 sm:p-6 sm:px-12">
         {/* contact */}
         <div className="grid gap-2">

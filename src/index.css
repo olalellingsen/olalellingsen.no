@@ -41,3 +41,7 @@ p {
 .single {
   @apply w-full;
 }
+
+.button {
+  @apply hover:bg-primary hover:text-white rounded-md border border-primary px-4 py-2 hover:cursor-pointer transition-all ease-in-out;
+}

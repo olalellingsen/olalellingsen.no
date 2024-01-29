@@ -4,7 +4,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
 import { set } from "firebase/database";
 
-function About({ id }: { id: string }) {
+function About() {
   // Bio paragraphs
   const [p1, setP1] = useState("");
   const [p2, setP2] = useState("");
@@ -44,7 +44,7 @@ function About({ id }: { id: string }) {
   }, [image]); // Dependency on image to re-fetch data when the image changes
 
   return (
-    <div className="" id={id}>
+    <div className="">
       <h1>About</h1>
       <div className="pt-4 grid gap-4 md:grid-cols-2">
         <img src={imageUrl} alt="About picture" />

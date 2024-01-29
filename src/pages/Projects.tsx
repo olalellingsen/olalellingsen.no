@@ -14,7 +14,7 @@ interface Project {
   leader: boolean;
 }
 
-function Projects({ id }: { id: string }) {
+function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>(
     {}
@@ -80,7 +80,7 @@ function Projects({ id }: { id: string }) {
   };
 
   return (
-    <div id={id}>
+    <div>
       <h1>Projects</h1>
       <div className="grid gap-8 md:grid-cols-2 pt-4 md:pt-8">
         {projects.map((project, index) => (

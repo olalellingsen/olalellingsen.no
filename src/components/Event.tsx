@@ -28,7 +28,7 @@ function Event({
 }: EventProps) {
   return (
     <div
-      className={`card grid gap-2 ${isPast ? "bg-primary/70 " : "bg-primary"}`}
+      className={`card grid gap-2 ${isPast ? "bg-primary/70" : "bg-primary"}`}
     >
       <h2 className="flex">{band}</h2>
       <div className="grid gap-4">
@@ -40,10 +40,12 @@ function Event({
             <Calendar />
             {date}
           </div>
-          <div className="flex gap-1">
-            <Clock />
-            {time === "00:00" ? "TBA" : time}
-          </div>
+          {!isPast && (
+            <div className="flex gap-1">
+              <Clock />
+              {time === "00:00" ? "TBA" : time}
+            </div>
+          )}
           <div className="flex gap-1">
             <MapPin />
             <a

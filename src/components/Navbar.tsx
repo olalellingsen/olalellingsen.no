@@ -1,50 +1,36 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
-
-import { Link } from "react-scroll";
 import SoMe from "./SoMe";
 import NavHeader from "./NavHeader";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuItems] = useState([
-    "Home",
-    "About",
-    "Projects",
-    "Music",
-    "Calendar",
+    { label: "Home", path: "/home" },
+    { label: "About", path: "/about" },
+    { label: "Projects", path: "/projects" },
+    { label: "Music", path: "/music" },
+    { label: "Calendar", path: "/calendar" },
   ]);
 
   function closeMenu() {
     setIsMenuOpen(false);
   }
 
-  function clickLink() {
-    setTimeout(() => {
-      closeMenu();
-    }, 200);
-  }
-
   return (
     <>
       <nav className="fixed h-16 xs:h-20 sm:h-24 p-2 xs:p-4 sm:px-6 flex justify-between w-full lightTheme">
         <div className="flex">
-          <Link to="home" smooth={true} duration={800} offset={-100}>
+          <Link to="/home">
             <NavHeader menuOpen={false} />
           </Link>
         </div>
         <div className="hidden md:flex gap-8 p-4 text-lg">
           {menuItems.map((item) => (
-            <Link
-              to={item}
-              smooth={true}
-              duration={800}
-              offset={-100}
-              className="navLink"
-              key={item}
-            >
-              {item}
+            <Link to={item.path} className="navLink" key={item.label}>
+              {item.label}
             </Link>
           ))}
         </div>
@@ -66,13 +52,12 @@ function Navbar() {
           <ul className="p-2 xs:p-4 text-5xl text-white grid gap-3 w-min">
             {menuItems.map((item) => (
               <Link
-                key={item}
-                to={item} // assuming your section IDs are lowercase
-                offset={-100}
+                key={item.label}
+                to={item.path}
                 className="hover:underline"
-                onClick={clickLink}
+                onClick={closeMenu}
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </ul>

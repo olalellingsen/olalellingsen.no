@@ -3,7 +3,7 @@ import { collection, getDocs, DocumentData } from "firebase/firestore"; // Impor
 // import { db } from "../firebase";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
-function Music({ id }: { id: string }) {
+function Music() {
   const [albums, setAlbums] = useState<string[]>([]);
 
   useEffect(() => {
@@ -31,10 +31,10 @@ function Music({ id }: { id: string }) {
     };
 
     fetchData();
-  }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
+  }); // Add 'id' as a dependency to refetch data when 'id' changes
 
   return (
-    <div id={id} className="grid gap-2">
+    <div className="grid gap-2">
       {/* Albums */}
       <h1>Music</h1>
       <h2>Albums</h2>

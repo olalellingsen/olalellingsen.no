@@ -1,27 +1,30 @@
-// App.jsx
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Music from "./pages/Music";
 import Footer from "./components/Footer";
 import Calendar from "./pages/Calendar";
-import Gallery from "./pages/Gallery";
-import { useState } from "react";
 import Projects from "./pages/Projects";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="lightTheme">
-      <Navbar />
-      <div className="pt-16 xs:pt-20 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-72 grid gap-12 md:gap-20 mb-24">
-        {/* <Home id="Home" /> */}
-        {/* <About id="About" /> */}
-        {/* <Projects id="Projects" /> */}
-        {/* <Music id="Music" /> */}
-        <Calendar id="Calendar" />
+    <BrowserRouter>
+      <div className="lightTheme">
+        <Navbar />
+        <div className="pt-16 xs:pt-20 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-72 grid gap-12 md:gap-20 mb-24">
+          <Routes>
+            <Route path="/" Component={Home} />
+            <Route path="/home" Component={Home} />
+            <Route path="/about" Component={About} />
+            <Route path="/projects" Component={Projects} />
+            <Route path="/music" Component={Music} />
+            <Route path="/calendar" Component={Calendar} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer id="Footer" />
-    </div>
+    </BrowserRouter>
   );
 }
 

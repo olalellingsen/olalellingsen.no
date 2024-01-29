@@ -75,6 +75,27 @@ function Projects() {
       // Open details for the clicked project
       newDetails[artist] = !prevDetails[artist];
 
+      // Move the selected project to the beginning of the projects array
+      setProjects((prevProjects) => {
+        const updatedProjects = [...prevProjects];
+        const selectedProjectIndex = updatedProjects.findIndex(
+          (project) => project.artist === artist
+        );
+
+        if (selectedProjectIndex !== -1) {
+          const selectedProject = updatedProjects.splice(
+            selectedProjectIndex,
+            1
+          )[0];
+          updatedProjects.unshift(selectedProject);
+        }
+
+        return updatedProjects;
+      });
+
+      // Scroll to the top of the page
+      window.scrollTo({ top: 0, behavior: "auto" });
+
       return newDetails;
     });
   };
@@ -82,15 +103,17 @@ function Projects() {
   return (
     <div>
       <h1>Projects</h1>
-      <div className="grid gap-8 md:grid-cols-2 pt-4 md:pt-8">
+      <div className="grid gap-4 sm:grid-cols-2 pt-4 md:pt-8 mx-auto lg:w-4/5 2xl:w-3/4">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="hover:text-primary transition-all ease-in-out"
+            className={`hover:text-primary transition-all ease-in-out mt-2 mx-auto ${
+              showDetails[project.artist] ? "sm:col-span-2" : ""
+            }`}
           >
             <h2 className="text-center">{project.artist}</h2>
             <img
-              className="hover:shadow-2xl transition-all ease-in-out cursor-pointer "
+              className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
               src={project.imageUrl}
               alt={`Project ${index + 1}`}
               onClick={() => handleToggleDetails(project.artist)}

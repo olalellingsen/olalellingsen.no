@@ -9,7 +9,6 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuItems] = useState([
     { label: "Home", path: "/home" },
-    { label: "About", path: "/about" },
     { label: "Projects", path: "/projects" },
     { label: "Music", path: "/music" },
     { label: "Calendar", path: "/calendar" },

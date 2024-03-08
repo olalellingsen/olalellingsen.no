@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Event, { EventProps } from "../components/Event";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 function Calendar() {
   const [eventData, setEventData] = useState<DocumentData[]>([]);
@@ -27,7 +26,7 @@ function Calendar() {
     };
 
     fetchData();
-  });
+  }, []);
 
   useEffect(() => {
     filterConcertData();
@@ -77,46 +76,33 @@ function Calendar() {
 
   return (
     <div className="lg:w-2/3 mx-auto">
-      {showPast ? (
-        <h1 className="p-2">Past concerts</h1>
-      ) : (
-        <h1 className="p-2">Upcoming concerts</h1>
-      )}
-      <div className="flex justify-center xl:justify-end py-4">
+      <h1>Calendar</h1>
+      <div className="flex justify-center py-4">
         <button onClick={() => setShowPast(!showPast)} className="button flex">
-          {showPast ? (
-            <>
-              <h2>Upcoming dates</h2>
-            </>
-          ) : (
-            <h2>Past dates</h2>
-          )}
+          {showPast ? <p>See upcoming dates</p> : <p>See past dates</p>}
         </button>
       </div>
 
       {!showPast && (
-        <div>
-          <div className="grid gap-4">
-            {upcomingEvents.map((event) => (
-              <Event {...event} />
-            ))}
-          </div>
+        <div className="grid gap-4">
+          {upcomingEvents.map((event) => (
+            <Event {...event} />
+          ))}
         </div>
       )}
-      <div>
-        {showPast && (
-          <div className="grid gap-4">
-            {pastEvents.map((event) => (
-              <Event
-                band={event.band}
-                date={event.date}
-                venue={event.venue}
-                isPast={true}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+
+      {showPast && (
+        <div className="grid gap-4">
+          {pastEvents.map((event) => (
+            <Event
+              band={event.band}
+              date={event.date}
+              venue={event.venue}
+              isPast={true}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

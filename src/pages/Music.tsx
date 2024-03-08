@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
-// import { db } from "../firebase";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { db } from "../firebase";
 
 function Music() {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -9,19 +8,19 @@ function Music() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const albumQuery = await getDocs(collection(db, "Albums"));
-        // const albumData = albumQuery.docs.map((doc) =>
-        //   doc.data()
-        // ) as DocumentData[];
-        // setAlbums(
-        //   albumData
-        //     .sort((a, b) => {
-        //       const aid = a.id;
-        //       const bid = b.id;
-        //       return bid - aid;
-        //     })
-        //     .map((doc) => doc.url)
-        // );
+        const albumQuery = await getDocs(collection(db, "Discography"));
+        const albumData = albumQuery.docs.map((doc) =>
+          doc.data()
+        ) as DocumentData[];
+        setAlbums(
+          albumData
+            .sort((a, b) => {
+              const aid = a.id;
+              const bid = b.id;
+              return bid - aid;
+            })
+            .map((doc) => doc.spotify)
+        );
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
@@ -31,7 +30,7 @@ function Music() {
     };
 
     fetchData();
-  }); // Add 'id' as a dependency to refetch data when 'id' changes
+  }, []);
 
   return (
     <div className="grid gap-2">

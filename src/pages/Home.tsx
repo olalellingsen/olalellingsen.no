@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { InstagramEmbed } from "react-social-media-embed";
+import About from "../components/About";
 
 function Home() {
   const [homeImage, setHomeImage] = useState("");
@@ -24,16 +24,13 @@ function Home() {
       }
     };
 
-    // Call the function to fetch data
     fetchData();
   }, [img]); // Dependency on img to re-fetch data when the image changes
 
   return (
-    <div className="">
-      <img src={homeImage} alt="HomeImage" className="" />
-      {/* <div className="">
-        <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
-      </div> */}
+    <div className="grid gap-8 md:gap-12">
+      <img src={homeImage} alt="HomeImage" className="w-full" />
+      <About />
     </div>
   );
 }

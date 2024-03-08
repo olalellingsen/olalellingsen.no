@@ -23,32 +23,26 @@ function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // Fetch project data from Firestore
         const querySnapshot = await getDocs(collection(db, "Projects"));
         const projectsData: Project[] = querySnapshot.docs.map(
           (doc) => doc.data() as Project
         );
 
-        // Fetch image URLs for each project from Firebase Storage
         const storage = getStorage();
-        const projectsWithImages = await Promise.all(
-          projectsData.map(async (project) => {
-            const imageRef = ref(storage, `Projects/${project.imgFileName}`);
-            const imageUrl = await getDownloadURL(imageRef);
-            return { ...project, imageUrl };
-          })
-        );
+        const getImageUrls = projectsData.map(async (project) => {
+          const imageRef = ref(storage, `Projects/${project.imgFileName}`);
+          const imageUrl = await getDownloadURL(imageRef);
+          return { ...project, imageUrl };
+        });
 
-        // Sort projects based on the 'leader' property
+        const projectsWithImages = await Promise.all(getImageUrls);
+
         const sortedProjects = projectsWithImages.sort((a, b) => {
-          // Put projects with 'leader' set to true first
           return a.leader === b.leader ? 0 : a.leader ? -1 : 1;
         });
 
-        // Set the projects state with sorted and image URLs
         setProjects(sortedProjects);
 
-        // Initialize showDetails state for each project
         const initialShowDetails: { [key: string]: boolean } = {};
         sortedProjects.forEach((project) => {
           initialShowDetails[project.artist] = false;
@@ -59,7 +53,6 @@ function Projects() {
       }
     };
 
-    // Call the function to fetch project data
     fetchProjects();
   }, []);
 
@@ -136,24 +129,6 @@ function Projects() {
                     </ul>
                   </div>
                 )}
-
-                {/* {project.albums && (
-                  <div>
-                    <h3>Music</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {project.albums.map((album, index) => (
-                        <iframe
-                          key={index}
-                          src={album}
-                          width="100%"
-                          height="352"
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                          loading="lazy"
-                        ></iframe>
-                      ))}
-                    </div>
-                  </div>
-                )} */}
 
                 {project.homepageUrl && (
                   <a

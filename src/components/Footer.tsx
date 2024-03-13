@@ -32,13 +32,15 @@ function Footer() {
       </div>
 
       <div className="text-center pt-8 font-thin">
-        <p>© 2024 Ola Lømo Ellingsen</p>
         {isSignedIn ? (
           <>
-            <button onClick={logout}>Admin sign out</button>
+            <p>Admin access</p>
+            <button className="hover:underline" onClick={logout}>
+              Sign out
+            </button>
           </>
         ) : (
-          <button onClick={login}>Admin</button>
+          <button onClick={login}>© 2024 Ola Lømo Ellingsen</button>
         )}
       </div>
     </div>

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "firebase": "^10.7.2",
+    "firebaseui": "^6.1.0",
     "lucide": "^0.294.0",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",

@@ -25,7 +25,7 @@ function Home() {
     };
 
     fetchData();
-  }, [img]); // Dependency on img to re-fetch data when the image changes
+  }, []);
 
   return (
     <div className="grid gap-8 md:gap-12">

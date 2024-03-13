@@ -56,9 +56,7 @@ function About() {
           <p className="py-1">{p3}</p>
         </div>
 
-        <div className="hidden xs:inline bg-white p-4 pb-0 rounded-xl">
-          <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
-        </div>
+        {/* <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" /> */}
 
         <iframe
           src="https://open.spotify.com/embed/artist/4NZ0fCPxiuIaEHw9kUgURe?utm_source=generator&theme=0"
@@ -67,6 +65,7 @@ function About() {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>
+
         <div className="flex justify-center">
           <Link to="/music">
             <button className="button">See discography</button>

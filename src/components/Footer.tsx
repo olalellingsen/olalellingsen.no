@@ -31,14 +31,14 @@ function Footer() {
         </div>
       </div>
 
-      <div className="text-center pt-8 font-extralight">
+      <div className="text-center pt-8 font-thin">
         <p>© 2024 Ola Lømo Ellingsen</p>
         {isSignedIn ? (
           <>
-            <button onClick={logout}>Sign out</button>
+            <button onClick={logout}>Admin sign out</button>
           </>
         ) : (
-          <button onClick={login}>Sign in</button>
+          <button onClick={login}>Admin</button>
         )}
       </div>
     </div>

@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div className="lightTheme flex flex-col min-h-screen">
+        <div className="lightTheme flex flex-col min-h-screen font-extralight">
           <Navbar />
           <div className="flex-grow">
             <div className="pt-16 xs:pt-24 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-80 grid gap-12 md:gap-20 mb-24">

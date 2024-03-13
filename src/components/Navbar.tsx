@@ -34,7 +34,7 @@ function Navbar() {
           ))}
         </div>
         <div className="md:hidden" onClick={() => setIsMenuOpen(true)}>
-          <Menu size={50} />
+          <Menu size={50} strokeWidth={1} />
         </div>
       </nav>
       {isMenuOpen && (
@@ -43,12 +43,17 @@ function Navbar() {
           <div className="h-20 sm:h-24 p-2 xs:p-4 flex justify-between w-full">
             <NavHeader menuOpen={true} />
             <div className="flex justify-end">
-              <X size={50} className="stroke-white" onClick={closeMenu} />
+              <X
+                size={50}
+                strokeWidth={1}
+                className="stroke-white"
+                onClick={closeMenu}
+              />
             </div>
           </div>
 
           {/* menu on mobile */}
-          <ul className="p-2 xs:p-4 text-5xl text-white grid gap-3 w-min">
+          <ul className="p-2 xs:p-4 text-4xl text-white grid gap-3 w-min">
             {menuItems.map((item) => (
               <Link
                 key={item.label}

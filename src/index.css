@@ -19,15 +19,15 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl font-light py-1;
+  @apply text-2xl py-1;
 }
 
 h3 {
-  @apply text-xl font-light py-1;
+  @apply text-xl py-1;
 }
 
 .navLink {
-  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary mb-1 hover:text-stone-600 transition-all ease-in-out;
+  @apply hover:cursor-pointer hover:border-b hover:border-primary mb-1 hover:text-stone-600 transition-all ease-in-out;
 }
 
 .soMeIcon {

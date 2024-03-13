@@ -30,24 +30,24 @@ function Event({
     <div
       className={`card grid gap-2 ${isPast ? "bg-primary/70" : "bg-primary"}`}
     >
-      <h2 className="flex">{band}</h2>
+      <h3 className="flex">{band}</h3>
       <div className="grid gap-4">
         {image !== undefined && (
           <img src={image} alt={"Image of " + band} className="rounded-md" />
         )}
         <div className="flex flex-wrap gap-4">
           <div className="flex gap-1">
-            <Calendar />
+            <Calendar strokeWidth={1} />
             {date}
           </div>
           {!isPast && (
             <div className="flex gap-1">
-              <Clock />
+              <Clock strokeWidth={1} />
               {time === "00:00" ? "TBA" : time}
             </div>
           )}
           <div className="flex gap-1">
-            <MapPin />
+            <MapPin strokeWidth={1} />
             <a
               className={venueLink !== undefined ? "underline" : ""}
               href={venueLink}
@@ -58,7 +58,7 @@ function Event({
 
           {ticketLink !== undefined && ticketLink !== "" && (
             <div className="flex gap-1">
-              <Ticket />
+              <Ticket strokeWidth={1} />
               <a className="underline" href={ticketLink}>
                 Tickets
               </a>

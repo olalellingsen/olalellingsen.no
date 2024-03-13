@@ -1,7 +1,10 @@
 import { Mail, Phone } from "lucide-react";
 import SoMe from "./SoMe";
+import { useAuth } from "../context/AuthContext";
 
 function Footer() {
+  const { isSignedIn, login, logout, user } = useAuth();
+
   return (
     <div className="bg-primary text-white p-4">
       <div className="grid gap-8 sm:flex justify-between p-2 sm:p-6 sm:px-12">
@@ -27,9 +30,17 @@ function Footer() {
           <SoMe spotify={true} size={40} />
         </div>
       </div>
-      <p className="text-center pt-8 font-extralight">
-        © 2024 Ola Lømo Ellingsen
-      </p>
+
+      <div className="text-center pt-8 font-extralight">
+        <p>© 2024 Ola Lømo Ellingsen</p>
+        {isSignedIn ? (
+          <>
+            <button onClick={logout}>Sign out</button>
+          </>
+        ) : (
+          <button onClick={login}>Sign in</button>
+        )}
+      </div>
     </div>
   );
 }

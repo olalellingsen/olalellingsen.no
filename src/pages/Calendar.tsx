@@ -156,9 +156,10 @@ function Calendar() {
             <input
               type="time"
               placeholder="Time"
-              value={date}
+              value={time} // Set the value to the time state variable
               onChange={(e) => setTime(e.target.value)}
             />
+
             <input
               type="text"
               placeholder="Name of venue"

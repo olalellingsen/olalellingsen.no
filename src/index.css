@@ -18,6 +18,11 @@
   @apply rounded-lg shadow-xl text-white p-4;
 }
 
+input,
+textarea {
+  @apply w-full p-2 rounded-md;
+}
+
 h1 {
   @apply text-3xl text-center py-1;
 }

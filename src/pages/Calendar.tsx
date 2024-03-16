@@ -187,7 +187,7 @@ function Calendar() {
 
       <div className="flex justify-center py-4">
         <button onClick={() => setShowPast(!showPast)} className="button flex">
-          {showPast ? <p>See upcoming dates</p> : <p>See past dates</p>}
+          {showPast ? <p>Show upcoming dates</p> : <p>Show past dates</p>}
         </button>
       </div>
 

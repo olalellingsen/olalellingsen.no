@@ -55,8 +55,22 @@ function ProjectDetails() {
   }
 
   return (
-    <div>
-      <h1>{project.artist}</h1>
+    <div className="w-full lg:w-3/4 mx-auto">
+      <h1>
+        {project.homepageUrl ? (
+          // If the project has a homepage, render the artist name as a link
+          <a
+            target="_blank"
+            className="hover:text-primary"
+            href={project.homepageUrl}
+          >
+            {project.artist}
+          </a>
+        ) : (
+          project.artist
+        )}
+      </h1>
+
       <div className="grid gap-4">
         <img src={project.imageUrl} alt={project.artist} />
         <p>{project.bio}</p>
@@ -91,11 +105,11 @@ function ProjectDetails() {
           <div>
             <a
               target="_blank"
-              className="flex underline gap-1"
+              className="flex underline"
               href={project.homepageUrl}
             >
               <p>{project.artist}</p>
-              <ExternalLink className="inline-block pt-1" />
+              <ExternalLink className="inline-block pt-1" strokeWidth={1.5} />
             </a>
           </div>
         )}

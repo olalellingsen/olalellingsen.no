@@ -147,7 +147,7 @@ function About() {
         )}
 
         <div className="flex justify-center">
-          <ButtonNav title="All projects" to="/projects" />
+          <ButtonNav title="See discography" to="/music" />
         </div>
       </div>
     </div>

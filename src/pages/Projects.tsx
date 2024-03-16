@@ -2,24 +2,18 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
-import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Project {
   artist: string;
-  bio: string;
-  albums: string[];
-  members: string[];
-  homepageUrl: string;
   imgFileName: string;
   imageUrl: string;
-  leader: boolean;
+  order: number;
 }
 
 function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -37,17 +31,10 @@ function Projects() {
 
         const projectsWithImages = await Promise.all(getImageUrls);
 
-        const sortedProjects = projectsWithImages.sort((a, b) => {
-          return a.leader === b.leader ? 0 : a.leader ? -1 : 1;
-        });
+        // Sort projects by order
+        projectsWithImages.sort((a, b) => a.order - b.order);
 
-        setProjects(sortedProjects);
-
-        const initialShowDetails: { [key: string]: boolean } = {};
-        sortedProjects.forEach((project) => {
-          initialShowDetails[project.artist] = false;
-        });
-        setShowDetails(initialShowDetails);
+        setProjects(projectsWithImages);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -56,46 +43,6 @@ function Projects() {
     fetchProjects();
   }, []);
 
-  const handleToggleDetails = (artist: string) => {
-    setShowDetails((prevDetails) => {
-      // Create a copy of the previous state
-      const newDetails = { ...prevDetails };
-
-      // Close details for all projects
-      Object.keys(newDetails).forEach((key) => {
-        newDetails[key] = false;
-      });
-
-      // Open details for the clicked project
-      newDetails[artist] = !prevDetails[artist];
-
-      // Move the selected project to the beginning of the projects array
-      setProjects((prevProjects) => {
-        const updatedProjects = [...prevProjects];
-        const selectedProjectIndex = updatedProjects.findIndex(
-          (project) => project.artist === artist
-        );
-
-        if (selectedProjectIndex !== -1 && window.innerWidth > 640) {
-          const selectedProject = updatedProjects.splice(
-            selectedProjectIndex,
-            1
-          )[0];
-          updatedProjects.unshift(selectedProject);
-        }
-
-        return updatedProjects;
-      });
-
-      // Scroll to the top of the page on large screens
-      if (window.innerWidth > 640) {
-        window.scrollTo({ top: 0, behavior: "auto" });
-      }
-
-      return newDetails;
-    });
-  };
-
   return (
     <div className="">
       <h1>Projects</h1>
@@ -103,45 +50,16 @@ function Projects() {
         {projects.map((project, index) => (
           <div
             key={index}
-            className={`hover:text-primary transition-all ease-in-out mt-2 mx-auto ${
-              showDetails[project.artist] ? "sm:col-span-2" : ""
-            }`}
+            className="hover:text-primary transition-all ease-in-out mt-2 mx-auto"
           >
             <h2 className="text-center">{project.artist}</h2>
-            <img
-              className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
-              src={project.imageUrl}
-              alt={`Project ${index + 1}`}
-              onClick={() => handleToggleDetails(project.artist)}
-            />
-
-            {/* Show details */}
-            {showDetails[project.artist] && (
-              <div className="grid gap-4 py-2 text-black">
-                <p>{project.bio}</p>
-                {project.members && (
-                  <div>
-                    <h3>Members</h3>
-                    <ul>
-                      {project.members.map((member, index) => (
-                        <li key={index}>{member}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {project.homepageUrl && (
-                  <a
-                    target="_blank"
-                    className="flex underline gap-1"
-                    href={project.homepageUrl}
-                  >
-                    <p>Read more about {project.artist}</p>
-                    <ExternalLink className="inline-block pt-1" />
-                  </a>
-                )}
-              </div>
-            )}
+            <Link to={`/projects/${project.artist}`}>
+              <img
+                className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
+                src={project.imageUrl}
+                alt={`Project ${index + 1}`}
+              />
+            </Link>
           </div>
         ))}
       </div>

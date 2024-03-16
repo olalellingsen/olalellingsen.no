@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { ExternalLink } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
+import ButtonNav from "../components/ButtonNav";
 
 interface Project {
   artist: string;
@@ -56,44 +57,49 @@ function ProjectDetails() {
   return (
     <div>
       <h1>{project.artist}</h1>
-      <img src={project.imageUrl} alt={project.artist} />
-      <p>{project.bio}</p>
+      <div className="grid gap-4">
+        <img src={project.imageUrl} alt={project.artist} />
+        <p>{project.bio}</p>
 
-      {project.members && (
-        <div>
-          <h3>Members</h3>
-          <ul>
-            {project.members.map((member, index) => (
-              <li key={index}>{member}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {project.members && (
+          <div>
+            <h3>Members</h3>
+            <ul>
+              {project.members.map((member, index) => (
+                <li key={index}>{member}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-      {project.spotify && (
-        <div>
-          <ul>
-            <iframe
-              src={project.spotify}
-              className="album"
-              width="100%"
-              height="380"
-              allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-          </ul>
-        </div>
-      )}
+        {project.spotify && (
+          <div>
+            <ul>
+              <iframe
+                src={project.spotify}
+                className="album"
+                width="100%"
+                height="380"
+                allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </ul>
+          </div>
+        )}
 
-      <div>
-        <a
-          target="_blank"
-          className="flex underline gap-1"
-          href={project.homepageUrl}
-        >
-          <p>Read more about {project.artist}</p>
-          <ExternalLink className="inline-block pt-1" />
-        </a>
+        {project.homepageUrl && (
+          <div>
+            <a
+              target="_blank"
+              className="flex underline gap-1"
+              href={project.homepageUrl}
+            >
+              <p>{project.artist}</p>
+              <ExternalLink className="inline-block pt-1" />
+            </a>
+          </div>
+        )}
+        <ButtonNav to="/projects" title="All projects" />
       </div>
     </div>
   );

@@ -3,8 +3,8 @@ import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
 import { InstagramEmbed } from "react-social-media-embed";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ButtonNav from "./ButtonNav";
 
 function About() {
   const { isSignedIn } = useAuth();
@@ -147,9 +147,7 @@ function About() {
         )}
 
         <div className="flex justify-center">
-          <Link to="/music">
-            <button className="button">See discography</button>
-          </Link>
+          <ButtonNav title="All projects" to="/projects" />
         </div>
       </div>
     </div>

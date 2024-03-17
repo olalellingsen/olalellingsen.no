@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { ChevronRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import ButtonNav from "../components/ButtonNav";
 
 interface Project {

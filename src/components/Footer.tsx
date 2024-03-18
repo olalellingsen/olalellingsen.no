@@ -3,7 +3,7 @@ import SoMe from "./SoMe";
 import { useAuth } from "../context/AuthContext";
 
 function Footer() {
-  const { isSignedIn, login, logout, user } = useAuth();
+  const { isSignedIn, login, logout } = useAuth();
 
   return (
     <div className="bg-primary text-white p-4">

@@ -2,12 +2,12 @@ function NavHeader({ menuOpen }: { menuOpen: boolean }) {
   return (
     <div className="hover:cursor-pointer">
       <h1
-        className={`hidden xs:flex ${menuOpen ? "text-white" : "text-primary"}`}
+        className={`hidden sm:flex ${menuOpen ? "text-white" : "text-primary"}`}
       >
         Ola Lømo Ellingsen
       </h1>
       <h2
-        className={`xs:hidden p-0 ${menuOpen ? "text-white" : "text-primary"}`}
+        className={`sm:hidden p-0 ${menuOpen ? "text-white" : "text-primary"}`}
       >
         Ola Lømo Ellingsen
       </h2>

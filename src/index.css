@@ -11,7 +11,7 @@
 }
 
 .mainContent {
-  @apply pt-16 xs:pt-24 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-80 grid gap-12 md:gap-20 mb-24;
+  @apply pt-16 px-2 sm:pt-20 sm:p-6 lg:px-24 xl:px-40 2xl:px-80 grid gap-12 md:gap-20 mb-24;
 }
 
 .card {

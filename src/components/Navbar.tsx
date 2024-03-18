@@ -20,27 +20,27 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 xs:h-20 sm:h-24 p-2 xs:p-4 sm:px-6 flex justify-between w-full lightTheme">
+      <nav className="fixed h-16 sm:h-20 p-2 sm:px-6 flex justify-between w-full lightTheme">
         <div className="flex">
           <Link to="/home">
             <NavHeader menuOpen={false} />
           </Link>
         </div>
-        <div className="hidden md:flex gap-8 p-4 text-lg">
+        <div className="hidden sm:flex gap-8 p-4 text-lg">
           {menuItems.map((item) => (
             <Link to={item.path} className="navLink" key={item.label}>
               {item.label}
             </Link>
           ))}
         </div>
-        <div className="md:hidden" onClick={() => setIsMenuOpen(true)}>
+        <div className="sm:hidden" onClick={() => setIsMenuOpen(true)}>
           <Menu size={50} strokeWidth={1} />
         </div>
       </nav>
       {isMenuOpen && (
         <div className="fixed md:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
-          <div className="h-20 sm:h-24 p-2 xs:p-4 flex justify-between w-full">
+          <div className="h-20 sm:h-24 p-2 flex justify-between w-full">
             <NavHeader menuOpen={true} />
             <div className="flex justify-end">
               <X
@@ -53,7 +53,7 @@ function Navbar() {
           </div>
 
           {/* menu on mobile */}
-          <ul className="p-2 xs:p-4 text-4xl text-white grid gap-3 w-min">
+          <ul className="p-2 text-4xl text-white grid gap-3 w-min">
             {menuItems.map((item) => (
               <Link
                 key={item.label}

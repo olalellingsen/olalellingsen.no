@@ -86,8 +86,6 @@ function About() {
     <div className="w-full lg:w-3/4 mx-auto">
       <h1>About</h1>
       <div className="grid gap-4 sm:gap-8">
-        {/* <img src={imageUrl} alt="About picture" className="" /> */}
-
         {/* Display editable input fields when user is logged in */}
         {isSignedIn ? (
           <div>
@@ -118,8 +116,6 @@ function About() {
           </>
         )}
 
-        {/* <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" /> */}
-
         <iframe
           src={spotify}
           width="100%"
@@ -148,6 +144,12 @@ function About() {
 
         <div className="flex justify-center">
           <ButtonNav title="See discography" to="/music" />
+        </div>
+
+        <img src={imageUrl} alt="About picture" className="" />
+
+        <div className="hidden xs:inline">
+          <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
         </div>
       </div>
     </div>

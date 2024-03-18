@@ -77,12 +77,25 @@ function ProjectDetails() {
 
         {project.members && (
           <div>
-            <h3>Members</h3>
+            <h2>Members</h2>
             <ul>
               {project.members.map((member, index) => (
                 <li key={index}>{member}</li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {project.homepageUrl && (
+          <div>
+            <a
+              target="_blank"
+              className="flex underline"
+              href={project.homepageUrl}
+            >
+              <p>{project.artist}</p>
+              <ExternalLink className="inline-block pt-1" strokeWidth={1.5} />
+            </a>
           </div>
         )}
 
@@ -101,18 +114,6 @@ function ProjectDetails() {
           </div>
         )}
 
-        {project.homepageUrl && (
-          <div>
-            <a
-              target="_blank"
-              className="flex underline"
-              href={project.homepageUrl}
-            >
-              <p>{project.artist}</p>
-              <ExternalLink className="inline-block pt-1" strokeWidth={1.5} />
-            </a>
-          </div>
-        )}
         <ButtonNav to="/projects" title="All projects" />
       </div>
     </div>

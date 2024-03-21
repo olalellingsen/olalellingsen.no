@@ -83,7 +83,7 @@ function About() {
   };
 
   return (
-    <div className="p-2 py-4 sm:py-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-4 sm:gap-8">
+    <div className="p-2 py-4 sm:py-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-4 sm:gap-12">
       {/* about text */}
       {isSignedIn ? (
         <div>

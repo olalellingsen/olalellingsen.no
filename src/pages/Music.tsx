@@ -33,7 +33,7 @@ function Music() {
   }, []);
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2 mainContent">
       {/* Albums */}
       <h1>Music</h1>
       <h2>Albums</h2>

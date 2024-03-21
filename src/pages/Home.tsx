@@ -29,7 +29,11 @@ function Home() {
 
   return (
     <div className="grid gap-8 md:gap-12">
-      <img src={homeImage} alt="HomeImage" className="w-full" />
+      <img
+        src={homeImage}
+        alt="HomeImage"
+        className="object-cover w-full h-screen"
+      />
       <About />
     </div>
   );

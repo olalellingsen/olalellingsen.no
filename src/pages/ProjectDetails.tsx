@@ -55,7 +55,7 @@ function ProjectDetails() {
   }
 
   return (
-    <div className="w-full lg:w-3/4 mx-auto">
+    <div className="w-full lg:w-3/4 mx-auto mainContent">
       <h1>
         {project.homepageUrl ? (
           // If the project has a homepage, render the artist name as a link

@@ -134,7 +134,7 @@ function Calendar() {
   };
 
   return (
-    <div className="lg:w-2/3 mx-auto">
+    <div className="mainContent lg:w-2/3 mx-auto">
       <h1>Calendar</h1>
 
       {isSignedIn && (

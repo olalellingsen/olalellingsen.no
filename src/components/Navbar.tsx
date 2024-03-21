@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 sm:h-20 p-2 sm:px-6 flex justify-between w-full lightTheme">
+      <nav className="fixed h-16 sm:h-20 p-2 sm:px-4 flex justify-between w-full lightTheme">
         <div className="flex">
           <Link to="/home">
             <NavHeader menuOpen={false} />
@@ -53,7 +53,7 @@ function Navbar() {
           </div>
 
           {/* menu on mobile */}
-          <ul className="p-2 text-4xl text-white grid gap-3 w-min">
+          <ul className="px-8 text-4xl text-white grid gap-3 w-min">
             {menuItems.map((item) => (
               <Link
                 key={item.label}

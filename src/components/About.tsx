@@ -83,39 +83,47 @@ function About() {
   };
 
   return (
-    <div className="w-full lg:w-3/4 mx-auto">
-      <h1>About</h1>
-      <div className="grid gap-4 sm:gap-8">
-        {/* Display editable input fields when user is logged in */}
-        {isSignedIn ? (
-          <div>
-            <h2>Edit about</h2>
-            <textarea
-              value={Bio}
-              onChange={(e) => setBio(e.target.value)}
-              rows={15}
-              style={{ maxWidth: "100%", width: "100%" }} // Add this style to limit width
-            />
-            <div className="flex gap-4">
-              <button className="button w-max" onClick={handleUpdateBio}>
-                Save Changes
-              </button>
-              <p>{responseBio}</p>
-            </div>
+    <div className="p-2 py-4 sm:py-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-4 sm:gap-12">
+      {/* about text */}
+      {isSignedIn ? (
+        <div>
+          <h2>Edit about</h2>
+          <textarea
+            value={Bio}
+            onChange={(e) => setBio(e.target.value)}
+            rows={15}
+            style={{ maxWidth: "100%", width: "100%" }} // Add this style to limit width
+          />
+          <div className="flex gap-4">
+            <button className="button w-max" onClick={handleUpdateBio}>
+              Save Changes
+            </button>
+            <p>{responseBio}</p>
           </div>
-        ) : (
-          <>
-            {/* Render plain text paragraphs when user is not logged in */}
-            <div>
-              {Bio.split("\n").map((paragraph, index) => (
-                <p className="py-1" key={index}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </>
-        )}
+        </div>
+      ) : (
+        <>
+          {/* Render plain text paragraphs when user is not logged in */}
+          <div>
+            {Bio.split("\n").map((paragraph, index) => (
+              <p className="py-1" key={index}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </>
+      )}
 
+      {/* collage */}
+      <img src={imageUrl} alt="About picture" className="w-full" />
+
+      {/* instagram */}
+      <div className="hidden xs:block w-full">
+        <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
+      </div>
+
+      {/* spotify player */}
+      <div>
         <iframe
           src={spotify}
           width="100%"
@@ -142,14 +150,9 @@ function About() {
           </div>
         )}
 
+        <br />
         <div className="flex justify-center">
           <ButtonNav title="See discography" to="/music" />
-        </div>
-
-        <img src={imageUrl} alt="About picture" className="" />
-
-        <div className="hidden xs:inline">
-          <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
         </div>
       </div>
     </div>

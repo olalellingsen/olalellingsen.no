@@ -15,17 +15,16 @@ function App() {
         <div className="lightTheme flex flex-col min-h-screen font-extralight">
           <Navbar />
           <div className="flex-grow">
-            <div className="mainContent">
-              <Routes>
-                <Route path="/" Component={Home} />
-                <Route path="/home" Component={Home} />
-                <Route path="/projects" Component={Projects} />
-                <Route path="/projects/:artist" Component={ProjectDetails} />
-                <Route path="/music" Component={Music} />
-                <Route path="/calendar" Component={Calendar} />
-              </Routes>
-            </div>
+            <Routes>
+              <Route path="/" Component={Home} />
+              <Route path="/home" Component={Home} />
+              <Route path="/projects" Component={Projects} />
+              <Route path="/projects/:artist" Component={ProjectDetails} />
+              <Route path="/music" Component={Music} />
+              <Route path="/calendar" Component={Calendar} />
+            </Routes>
           </div>
+
           <Footer />
         </div>
       </AuthProvider>

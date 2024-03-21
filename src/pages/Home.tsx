@@ -28,7 +28,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="grid gap-8 md:gap-12">
+    <div>
       <img
         src={homeImage}
         alt="HomeImage"

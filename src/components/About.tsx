@@ -83,8 +83,8 @@ function About() {
   };
 
   return (
-    <div className="sm:p-6 px-2 lg:px-24 xl:px-40 2xl:px-80 mb-24 grid gap-4">
-      {/* Display editable input fields when user is logged in */}
+    <div className="p-2 py-4 sm:py-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-4 sm:gap-8">
+      {/* about text */}
       {isSignedIn ? (
         <div>
           <h2>Edit about</h2>
@@ -113,6 +113,14 @@ function About() {
           </div>
         </>
       )}
+
+      {/* collage */}
+      <img src={imageUrl} alt="About picture" className="w-full" />
+
+      {/* instagram */}
+      <div className="hidden xs:block w-full">
+        <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
+      </div>
 
       {/* spotify player */}
       <div>
@@ -146,15 +154,6 @@ function About() {
         <div className="flex justify-center">
           <ButtonNav title="See discography" to="/music" />
         </div>
-      </div>
-
-      <br />
-
-      <div className="grid gap-2 sm:gap-4 lg:grid-cols-2">
-        <div className="hidden xs:inline">
-          <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
-        </div>
-        <img src={imageUrl} alt="About picture" className="w-full" />
       </div>
     </div>
   );

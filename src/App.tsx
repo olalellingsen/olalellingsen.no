@@ -17,14 +17,12 @@ function App() {
           <div className="flex-grow">
             <Routes>
               <Route path="/" Component={Home} />
-              <Route path="/home" Component={Home} />
               <Route path="/projects" Component={Projects} />
               <Route path="/projects/:artist" Component={ProjectDetails} />
               <Route path="/music" Component={Music} />
               <Route path="/calendar" Component={Calendar} />
             </Routes>
           </div>
-
           <Footer />
         </div>
       </AuthProvider>

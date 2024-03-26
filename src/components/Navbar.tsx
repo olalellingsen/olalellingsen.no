@@ -8,7 +8,7 @@ import NavHeader from "./NavHeader";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuItems] = useState([
-    { label: "Home", path: "/home" },
+    { label: "Home", path: "/" },
     { label: "Projects", path: "/projects" },
     { label: "Music", path: "/music" },
     { label: "Calendar", path: "/calendar" },
@@ -22,7 +22,7 @@ function Navbar() {
     <>
       <nav className="fixed h-16 sm:h-20 p-2 sm:px-4 flex justify-between w-full lightTheme">
         <div className="flex">
-          <Link to="/home">
+          <Link to="/">
             <NavHeader menuOpen={false} />
           </Link>
         </div>

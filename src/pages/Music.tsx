@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
+import Spinner from "../components/Spinner";
 
 function Music() {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -36,6 +37,7 @@ function Music() {
     <div className="grid gap-2 mainContent">
       {/* Albums */}
       <h1>Music</h1>
+      {albums.length === 0 && <Spinner />}
       <h2>Albums</h2>
       <div className="grid gap-2 md:grid-cols-2 sm:gap-4">
         {albums.map((album) => (

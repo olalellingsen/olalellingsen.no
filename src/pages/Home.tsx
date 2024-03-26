@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+// import { useEffect, useState } from "react";
+// import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import About from "../components/About";
 import homeImg from "../assets/homeimg.jpg";
 

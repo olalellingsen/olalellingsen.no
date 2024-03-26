@@ -3,6 +3,7 @@ import { collection, getDocs, DocumentData, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import Event, { EventProps } from "../components/Event";
 import { useAuth } from "../context/AuthContext";
+import Spinner from "../components/Spinner";
 
 function Calendar() {
   const { isSignedIn } = useAuth();
@@ -136,6 +137,7 @@ function Calendar() {
   return (
     <div className="mainContent lg:w-4/5 xl:w-3/4 mx-auto">
       <h1>Calendar</h1>
+      {eventData.length === 0 && <Spinner />}
 
       {isSignedIn && (
         <div className="my-8 rounded-lg text-center">

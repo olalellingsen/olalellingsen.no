@@ -5,6 +5,7 @@ import { db } from "../firebase";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { ExternalLink } from "lucide-react";
 import ButtonNav from "../components/ButtonNav";
+import Spinner from "../components/Spinner";
 
 interface Project {
   artist: string;
@@ -51,7 +52,7 @@ function ProjectDetails() {
   }, [artist]);
 
   if (!project) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (

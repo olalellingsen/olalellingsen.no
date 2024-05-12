@@ -61,6 +61,7 @@ function Projects() {
                 className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
                 src={project.imageUrl}
                 alt={`Project ${index + 1}`}
+                loading="lazy"
               />
             </Link>
           </div>

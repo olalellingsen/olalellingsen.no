@@ -137,7 +137,6 @@ function Calendar() {
   return (
     <div className="mainContent lg:w-4/5 xl:w-3/4 mx-auto">
       <h1>Calendar</h1>
-      {eventData.length === 0 && <Spinner />}
 
       {isSignedIn && (
         <div className="my-8 rounded-lg text-center">
@@ -192,6 +191,8 @@ function Calendar() {
           {showPast ? <p>Show upcoming dates</p> : <p>Show past dates</p>}
         </button>
       </div>
+
+      {eventData.length === 0 && <Spinner />}
 
       {!showPast && (
         <div className="grid gap-4">

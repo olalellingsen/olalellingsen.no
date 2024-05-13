@@ -19,13 +19,13 @@ function Home() {
           <Bio />
         </SmoothRender>
 
-        <SmoothRender>
+        <SmoothRender delay={1000}>
           <div className="hidden xs:block w-full">
             <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
           </div>
         </SmoothRender>
 
-        <SmoothRender>
+        <SmoothRender delay={1000}>
           <SpotifyPlayer link="https://open.spotify.com/embed/artist/4NZ0fCPxiuIaEHw9kUgURe?utm_source=generator&theme=0" />
         </SmoothRender>
 

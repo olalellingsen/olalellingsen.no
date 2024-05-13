@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Spinner from "../components/Spinner";
+import SmoothRender from "../components/SmoothRender";
 
 function Music() {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -41,14 +42,16 @@ function Music() {
       <h2>Albums</h2>
       <div className="grid gap-2 md:grid-cols-2 sm:gap-4">
         {albums.map((album) => (
-          <iframe
-            src={album}
-            className="album"
-            width="100%"
-            height="380"
-            allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
+          <SmoothRender key={album}>
+            <iframe
+              src={album}
+              className="album"
+              width="100%"
+              height="380"
+              allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </SmoothRender>
         ))}
       </div>
     </div>

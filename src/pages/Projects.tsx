@@ -4,6 +4,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import SmoothRender from "../components/SmoothRender";
 
 interface Project {
   artist: string;
@@ -51,20 +52,22 @@ function Projects() {
 
       <div className="grid gap-4 sm:grid-cols-2 pt-4 md:pt-8 mx-auto lg:w-4/5 2xl:w-3/4">
         {projects.map((project, index) => (
-          <div
-            key={index}
-            className="hover:text-primary transition-all ease-in-out mt-2 mx-auto"
-          >
-            <h2 className="text-center">{project.artist}</h2>
-            <Link to={`/projects/${project.artist}`}>
-              <img
-                className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
-                src={project.imageUrl}
-                alt={`Project ${index + 1}`}
-                loading="lazy"
-              />
-            </Link>
-          </div>
+          <SmoothRender key={index}>
+            <div
+              key={index}
+              className="hover:text-primary transition-all ease-in-out mt-2 mx-auto"
+            >
+              <h2 className="text-center">{project.artist}</h2>
+              <Link to={`/projects/${project.artist}`}>
+                <img
+                  className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
+                  src={project.imageUrl}
+                  alt={`Project ${index + 1}`}
+                  loading="lazy"
+                />
+              </Link>
+            </div>
+          </SmoothRender>
         ))}
       </div>
     </div>

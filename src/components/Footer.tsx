@@ -6,7 +6,7 @@ function Footer() {
   const { isSignedIn, login, logout } = useAuth();
 
   return (
-    <div className="bg-primary text-white p-4">
+    <div className="text-white p-4">
       <div className="grid gap-8 sm:flex justify-between p-2 sm:p-6 sm:px-12">
         {/* contact */}
         <div className="grid gap-2">

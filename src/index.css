@@ -7,7 +7,7 @@
 }
 
 .darkTheme {
-  @apply bg-slate-900 text-slate-200;
+  @apply bg-slate-900 text-slate-300;
 }
 
 .mainContent {
@@ -36,7 +36,7 @@ h3 {
 }
 
 .navLink {
-  @apply hover:cursor-pointer hover:border-b hover:border-primary mb-1 hover:text-stone-600 transition-all ease-in-out;
+  @apply hover:cursor-pointer hover:text-slate-200 transition-all ease-in-out;
 }
 
 .soMeIcon {

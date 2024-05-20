@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import Event, { EventProps } from "../components/Event";
 import { useAuth } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
+import SmoothRender from "../components/SmoothRender";
 
 function Calendar() {
   const { isSignedIn } = useAuth();
@@ -196,21 +197,25 @@ function Calendar() {
 
       {!showPast && (
         <div className="grid gap-4">
-          {upcomingEvents.map((event) => (
-            <Event {...event} />
+          {upcomingEvents.map((event, index) => (
+            <SmoothRender delay={100} index={index}>
+              <Event {...event} />
+            </SmoothRender>
           ))}
         </div>
       )}
 
       {showPast && (
         <div className="grid gap-4">
-          {pastEvents.map((event) => (
-            <Event
-              band={event.band}
-              date={event.date}
-              venue={event.venue}
-              isPast={true}
-            />
+          {pastEvents.map((event, index) => (
+            <SmoothRender delay={100} index={index}>
+              <Event
+                band={event.band}
+                date={event.date}
+                venue={event.venue}
+                isPast={true}
+              />
+            </SmoothRender>
           ))}
         </div>
       )}

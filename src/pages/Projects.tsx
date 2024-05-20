@@ -53,20 +53,20 @@ function Projects() {
       <div className="grid gap-4 sm:grid-cols-2 pt-4 md:pt-8 mx-auto lg:w-4/5 2xl:w-3/4">
         {projects.map((project, index) => (
           <SmoothRender key={index} index={index} delay={200}>
-            <div
-              key={index}
-              className="hover:text-primary transition-all ease-in-out mt-2 mx-auto"
-            >
-              <h2 className="text-center">{project.artist}</h2>
-              <Link to={`/projects/${project.artist}`}>
+            <Link to={`/projects/${project.artist}`}>
+              <div
+                key={index}
+                className="sm:hover:text-primary transition-all ease-in-out mt-2 mx-auto"
+              >
+                <h2 className="text-center">{project.artist}</h2>
                 <img
                   className="hover:shadow-2xl transition-all ease-in-out cursor-pointer"
                   src={project.imageUrl}
                   alt={`Project ${index + 1}`}
                   loading="lazy"
                 />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </SmoothRender>
         ))}
       </div>

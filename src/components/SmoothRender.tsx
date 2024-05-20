@@ -7,7 +7,10 @@ interface SmoothInViewProps {
   index?: number;
 }
 
-function SmoothRender({ children, delay = 500, index = 0 }: SmoothInViewProps) {
+function SmoothRender({ children, delay = 250, index = 0 }: SmoothInViewProps) {
+  if (screen.width > 640) {
+    delay = 500;
+  }
   const calculatedDelay = delay * index;
   return (
     <InView>

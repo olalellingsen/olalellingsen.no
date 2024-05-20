@@ -14,10 +14,6 @@
   @apply pt-20 px-2 lg:px-24 xl:px-40 2xl:px-80 mb-24;
 }
 
-.card {
-  @apply rounded-lg shadow-xl text-white p-4;
-}
-
 input,
 textarea {
   @apply w-full p-2 rounded-md;

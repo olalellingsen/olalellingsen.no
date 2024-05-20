@@ -36,9 +36,11 @@ function Event({
 
   return (
     <div
-      className={`card grid gap-2 ${isPast ? "bg-primary/70" : "bg-primary"}`}
+      className={`border-b border-slate-500 py-2 ${
+        isPast ? "text-slate-400" : "text-slate-50"
+      }`}
     >
-      <h3 className="flex justify-between">
+      <h3 className="flex justify-between font-normal">
         {band}
         {isSignedIn && (
           <div className="flex gap-2">
@@ -73,7 +75,7 @@ function Event({
             </a>
           </div>
 
-          {ticketLink !== undefined && ticketLink !== "" && (
+          {ticketLink !== undefined && ticketLink !== "" && !isPast && (
             <div className="flex gap-1">
               <Ticket strokeWidth={1} />
               <a className="underline" href={ticketLink}>

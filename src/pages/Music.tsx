@@ -36,8 +36,8 @@ function Music() {
 
   return (
     <div className="grid gap-2 mainContent">
-      {/* Albums */}
       <h1>Music</h1>
+      <br />
       {albums.length === 0 && <Spinner />}
       <div className="grid gap-2 md:grid-cols-2 sm:gap-4">
         {albums.map((album, index) => (

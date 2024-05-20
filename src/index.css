@@ -57,5 +57,5 @@ li {
 }
 
 .button {
-  @apply hover:bg-primary hover:text-white rounded-md border border-primary px-4 py-2 hover:cursor-pointer transition-all ease-in-out;
+  @apply bg-primary/50 md:hover:bg-primary text-white rounded-md border border-primary px-4 py-2 hover:cursor-pointer transition-all ease-in-out;
 }

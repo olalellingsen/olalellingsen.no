@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, DocumentData, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import Event, { EventProps } from "../components/Event";
 import { useAuth } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
 import SmoothRender from "../components/SmoothRender";
+import ConfirmationDialog from "../components/ConfirmationDialog"; // Import the ConfirmationDialog component
 
 function Calendar() {
   const { isSignedIn } = useAuth();
@@ -22,13 +31,22 @@ function Calendar() {
   const [venueLink, setVenueLink] = useState("");
   const [ticketLink, setTicketLink] = useState("");
 
+  // State variables for editing events
+  const [isEditing, setIsEditing] = useState(false);
+  const [editEventId, setEditEventId] = useState<string | null>(null);
+
+  // State variables for delete confirmation dialog
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [deleteEventId, setDeleteEventId] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "Concerts"));
-        const concertData = querySnapshot.docs.map((doc) =>
-          doc.data()
-        ) as DocumentData[];
+        const concertData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as DocumentData[];
         setEventData(concertData);
       } catch (error) {
         console.error(
@@ -49,6 +67,7 @@ function Calendar() {
     const currentDate = new Date();
 
     const allEvents = eventData.map((event) => ({
+      id: event.id,
       band: event.band,
       date: event.date.toDate(), // Convert Firestore Timestamp to JavaScript Date object
       venue: event.venue,
@@ -105,16 +124,29 @@ function Calendar() {
       const dateTime = new Date(date + "T" + time);
       console.log(dateTime);
 
-      // Add new concert document to Firestore
-      await addDoc(collection(db, "Concerts"), {
-        band,
-        date: dateTime, // Store DateTime object in Firestore
-        venue,
-        venueLink,
-        ticketLink,
-      });
+      if (isEditing && editEventId) {
+        // Update existing event
+        await updateDoc(doc(db, "Concerts", editEventId), {
+          band,
+          date: dateTime,
+          venue,
+          venueLink,
+          ticketLink,
+        });
+        setIsEditing(false);
+        setEditEventId(null);
+      } else {
+        // Add new concert document to Firestore
+        await addDoc(collection(db, "Concerts"), {
+          band,
+          date: dateTime, // Store DateTime object in Firestore
+          venue,
+          venueLink,
+          ticketLink,
+        });
+      }
 
-      // Clear form fields after adding concert
+      // Clear form fields after adding or updating concert
       setBand("");
       setDate("");
       setTime("");
@@ -124,14 +156,54 @@ function Calendar() {
 
       // Fetch updated concert data
       const querySnapshot = await getDocs(collection(db, "Concerts"));
-      const concertData = querySnapshot.docs.map((doc) =>
-        doc.data()
-      ) as DocumentData[];
+      const concertData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as DocumentData[];
       setEventData(concertData);
 
-      console.log("Concert added successfully!");
+      console.log("Concert added/updated successfully!");
     } catch (error) {
-      console.error("Error adding concert:", error);
+      console.error("Error adding/updating concert:", error);
+    }
+  };
+
+  // Function to handle event editing
+  const handleEditEvent = (id: string) => {
+    const eventToEdit = eventData.find((event) => event.id === id);
+    if (eventToEdit) {
+      setBand(eventToEdit.band);
+      setDate(eventToEdit.date.toDate().toISOString().split("T")[0]); // Set date in YYYY-MM-DD format
+      setTime(
+        eventToEdit.date.toDate().toISOString().split("T")[1].slice(0, 5)
+      ); // Set time in HH:MM format
+      setVenue(eventToEdit.venue);
+      setVenueLink(eventToEdit.venueLink);
+      setTicketLink(eventToEdit.ticketLink);
+      setIsEditing(true);
+      setEditEventId(id);
+    }
+  };
+
+  // Function to handle event deletion
+  const handleDeleteEvent = (id: string) => {
+    setDeleteEventId(id);
+    setIsDialogOpen(true);
+  };
+
+  // Function to confirm event deletion
+  const confirmDeleteEvent = async () => {
+    if (deleteEventId) {
+      try {
+        await deleteDoc(doc(db, "Concerts", deleteEventId));
+        setEventData(eventData.filter((event) => event.id !== deleteEventId));
+        console.log("Concert deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting concert:", error);
+      } finally {
+        setIsDialogOpen(false);
+        setDeleteEventId(null);
+      }
     }
   };
 
@@ -141,7 +213,7 @@ function Calendar() {
 
       {isSignedIn && (
         <div className="my-8 rounded-lg text-center">
-          <h2>Add concert</h2>
+          <h2>{isEditing ? "Edit concert" : "Add concert"}</h2>
           <form className="grid gap-2" onSubmit={handleAddConcert}>
             <input
               type="text"
@@ -181,7 +253,7 @@ function Calendar() {
               onChange={(e) => setTicketLink(e.target.value)}
             />
             <button className="button" type="submit">
-              Add concert
+              {isEditing ? "Update concert" : "Add concert"}
             </button>
           </form>
         </div>
@@ -197,9 +269,13 @@ function Calendar() {
 
       {!showPast && (
         <div className="grid gap-4">
-          {upcomingEvents.map((event, index) => (
-            <SmoothRender delay={100} index={index}>
-              <Event {...event} />
+          {upcomingEvents.map((event) => (
+            <SmoothRender key={event.id}>
+              <Event
+                {...event}
+                onEdit={handleEditEvent}
+                onDelete={handleDeleteEvent}
+              />
             </SmoothRender>
           ))}
         </div>
@@ -207,18 +283,25 @@ function Calendar() {
 
       {showPast && (
         <div className="grid gap-4">
-          {pastEvents.map((event, index) => (
-            <SmoothRender delay={100} index={index}>
+          {pastEvents.map((event) => (
+            <SmoothRender key={event.id}>
               <Event
-                band={event.band}
-                date={event.date}
-                venue={event.venue}
+                {...event}
                 isPast={true}
+                onEdit={handleEditEvent}
+                onDelete={handleDeleteEvent}
               />
             </SmoothRender>
           ))}
         </div>
       )}
+
+      <ConfirmationDialog
+        isOpen={isDialogOpen}
+        message="Are you sure you want to delete this concert?"
+        onConfirm={confirmDeleteEvent}
+        onCancel={() => setIsDialogOpen(false)}
+      />
     </div>
   );
 }

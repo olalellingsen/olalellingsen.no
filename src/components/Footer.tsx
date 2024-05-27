@@ -6,28 +6,30 @@ function Footer() {
   const { isSignedIn, login, logout } = useAuth();
 
   return (
-    <div className="text-white p-4">
+    <div className="p-4">
       <div className="grid gap-8 sm:flex justify-between p-2 sm:p-6 sm:px-12">
         {/* contact */}
         <div className="grid gap-2">
-          <div className="flex gap-2 underline">
-            <Mail size={25} />
+          <div className="flex gap-2">
+            <Mail className="stroke-1" size={25} />
             <a href="mailto:ola.l.ellingsen@gmail.com">
               ola.l.ellingsen@gmail.com
             </a>
           </div>
           <div className="flex gap-2">
-            <Phone size={25} />
+            <Phone className="stroke-1" size={25} />
             <a href="tel:+4790197381">+47 90 19 73 81</a>
           </div>
         </div>
 
         {/* social media */}
-        <div className="flex justify-between gap-2">
-          <SoMe face={true} size={40} />
-          <SoMe insta={true} size={40} />
-          <SoMe linkedin={true} size={40} />
-          <SoMe spotify={true} size={40} />
+        <div className="flex justify-between gap-3">
+          <SoMe face={true} size={30} />
+          <SoMe insta={true} size={30} />
+          <SoMe spotify={true} size={30} />
+          <SoMe apple_music={true} size={30} />
+          <SoMe yt={true} size={30} />
+          <SoMe linkedin={true} size={30} />
         </div>
       </div>
 

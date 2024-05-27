@@ -35,11 +35,10 @@ function Music() {
   }, []);
 
   return (
-    <div className="grid gap-2 mainContent">
+    <div className="grid gap-4 mainContent">
       <h1>Music</h1>
-      <br />
       {albums.length === 0 && <Spinner />}
-      <div className="grid gap-2 md:grid-cols-2 sm:gap-4">
+      <div className="grid gap-2 md:pt-8 md:grid-cols-2 sm:gap-4">
         {albums.map((album, index) => (
           <SmoothRender key={album} index={index} delay={200}>
             <iframe

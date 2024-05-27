@@ -1,4 +1,4 @@
-function NavHeader({ menuOpen }: { menuOpen: boolean }) {
+function NavHeader() {
   return (
     <div className="hover:cursor-pointer">
       <h1 className={`hidden sm:flex`}>Ola Lømo Ellingsen</h1>

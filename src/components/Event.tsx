@@ -36,11 +36,11 @@ function Event({
 
   return (
     <div
-      className={`border-b border-slate-500 py-2 ${
-        isPast ? "text-slate-400" : "text-slate-50"
+      className={` text-stone-200 p-4 rounded-lg shadow-xl ${
+        isPast ? "bg-primary/60" : "bg-primary"
       }`}
     >
-      <h3 className="flex justify-between font-normal">
+      <h3 className="flex justify-between">
         {band}
         {isSignedIn && (
           <div className="flex gap-2">
@@ -70,6 +70,7 @@ function Event({
             <a
               className={venueLink !== undefined ? "underline" : ""}
               href={venueLink}
+              target="_blank"
             >
               {venue}
             </a>
@@ -78,7 +79,7 @@ function Event({
           {ticketLink !== undefined && ticketLink !== "" && !isPast && (
             <div className="flex gap-1">
               <Ticket strokeWidth={1} />
-              <a className="underline" href={ticketLink}>
+              <a className="underline" href={ticketLink} target="_blank">
                 Tickets
               </a>
             </div>

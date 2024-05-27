@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <MenuProvider>
-          <div className="darkTheme flex flex-col min-h-screen font-extralight">
+          <div className="lightTheme flex flex-col min-h-screen font-extralight">
             <Navbar />
             <div className="flex-grow">
               <Routes>

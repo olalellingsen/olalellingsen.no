@@ -1,4 +1,4 @@
-import { Facebook } from "lucide-react";
+import { Facebook, Music } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Youtube } from "lucide-react";
 import { Linkedin } from "lucide-react";
@@ -10,10 +10,19 @@ interface Props {
   yt?: boolean;
   linkedin?: boolean;
   spotify?: boolean;
+  apple_music?: boolean;
   size?: number;
 }
 
-function SoMe({ face, insta, yt, size, linkedin, spotify }: Props) {
+function SoMe({
+  face,
+  insta,
+  yt,
+  size,
+  linkedin,
+  spotify,
+  apple_music,
+}: Props) {
   return (
     <div>
       {face && (
@@ -35,7 +44,10 @@ function SoMe({ face, insta, yt, size, linkedin, spotify }: Props) {
       )}
       {yt && (
         <div>
-          <a href="https://youtube.com/" target="blank">
+          <a
+            href="https://www.youtube.com/channel/UCAltmN05xqbQTgOJCbBNeag"
+            target="blank"
+          >
             <Youtube size={size} className="soMeIcon" />
           </a>
         </div>
@@ -62,6 +74,16 @@ function SoMe({ face, insta, yt, size, linkedin, spotify }: Props) {
               className="soMeIcon"
               width={size}
             />
+          </a>
+        </div>
+      )}
+      {apple_music && (
+        <div>
+          <a
+            href="https://music.apple.com/us/artist/ola-l%C3%B8mo-ellingsen/1541847395"
+            target="blank"
+          >
+            <Music size={size} className="soMeIcon" />
           </a>
         </div>
       )}

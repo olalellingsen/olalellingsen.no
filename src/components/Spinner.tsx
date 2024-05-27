@@ -7,7 +7,7 @@ type Props = {
 function Spinner({ isLoading = true }: Props) {
   return (
     <div className="flex justify-center pt-32">
-      <ClipLoader color="white" loading={isLoading} size={100} />
+      <ClipLoader loading={isLoading} size={100} />
     </div>
   );
 }

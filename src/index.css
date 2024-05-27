@@ -7,7 +7,7 @@
 }
 
 .darkTheme {
-  @apply bg-slate-900 text-slate-300;
+  @apply bg-stone-800 text-stone-200;
 }
 
 .mainContent {
@@ -32,11 +32,15 @@ h3 {
 }
 
 .navLink {
-  @apply hover:cursor-pointer hover:text-slate-200 transition-all ease-in-out;
+  @apply hover:cursor-pointer hover:text-stone-800 transition-all ease-in-out;
+}
+
+.navLinkWhite {
+  @apply hover:cursor-pointer hover:text-stone-200 transition-all ease-in-out;
 }
 
 .soMeIcon {
-  @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
+  @apply hover:cursor-pointer hover:scale-105 stroke-1;
 }
 
 p,
@@ -53,5 +57,5 @@ li {
 }
 
 .button {
-  @apply bg-primary/50 md:hover:bg-primary text-white rounded-md border border-primary px-4 py-2 hover:cursor-pointer transition-all ease-in-out;
+  @apply md:hover:bg-primary md:hover:text-stone-200 rounded-full border border-primary px-4 py-2 hover:cursor-pointer transition-all ease-in-out;
 }

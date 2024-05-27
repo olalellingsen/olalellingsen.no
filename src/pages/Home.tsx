@@ -6,8 +6,6 @@ import SpotifyPlayer from "../components/SpotifyPlayer";
 import SmoothRender from "../components/SmoothRender";
 import Collage from "../components/Collage";
 
-//bg-gradient-to-b from-black via-[#0F1316] to-black
-
 function Home() {
   return (
     <div>

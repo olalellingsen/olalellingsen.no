@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
@@ -10,7 +10,11 @@ function Navbar() {
   const { isOpen, openMenu, closeMenu } = useMenuContext();
   const location = useLocation();
 
-  const whiteNavbar = useState(location.pathname === "/");
+  const [whiteNavbar, setWhitenavbar] = useState(location.pathname === "/");
+
+  useEffect(() => {
+    setWhitenavbar(location.pathname === "/");
+  }, [location]);
 
   const [menuItems] = useState([
     { label: "Home", path: "/" },

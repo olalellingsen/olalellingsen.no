@@ -1,31 +1,35 @@
+import { useEffect, useState } from "react";
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 import SmoothRender from "./SmoothRender";
 
 function Collage() {
-  const images = [
-    "https://source.unsplash.com/1600x900/?nature",
-    "https://source.unsplash.com/1600x900/?water",
-    "https://source.unsplash.com/1600x900/?mountain",
-    "https://source.unsplash.com/1600x900/?forest",
-    "https://source.unsplash.com/1600x900/?sky",
-    "https://source.unsplash.com/1600x900/?clouds",
-    "https://source.unsplash.com/1600x900/?sunset",
-    "https://source.unsplash.com/1600x900/?sunrise",
-    "https://source.unsplash.com/1600x900/?moon",
-    "https://source.unsplash.com/1600x900/?stars",
-    "https://source.unsplash.com/1600x900/?night",
-    "https://source.unsplash.com/1600x900/?day",
-  ];
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    const storage = getStorage();
+    const fetchImages = async () => {
+      const imagesRef = ref(storage, "Collage/");
+      const imageList = await listAll(imagesRef);
+      const imagePromises = imageList.items.map((item) => getDownloadURL(item));
+      const imageUrls = await Promise.all(imagePromises);
+      setImages(imageUrls);
+    };
+
+    fetchImages();
+  }, []);
 
   return (
     <div>
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {images.map((image, index) => (
-          <img
-            src={image}
-            alt={`CollageImage${index}`}
-            className="object-cover w-full h-48 sm:h-64"
-            key={index}
-          />
+          <SmoothRender index={index}>
+            <img
+              src={image}
+              alt={`CollageImage${index}`}
+              className="object-cover w-full h-48 sm:h-64"
+              key={index}
+            />
+          </SmoothRender>
         ))}
       </div>
     </div>

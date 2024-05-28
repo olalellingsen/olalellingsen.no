@@ -40,7 +40,7 @@ function Music() {
       {albums.length === 0 && <Spinner />}
       <div className="grid gap-2 md:pt-8 md:grid-cols-2 sm:gap-4">
         {albums.map((album, index) => (
-          <SmoothRender key={album} index={index} delay={200}>
+          <SmoothRender key={album} index={index} slow>
             <iframe
               src={album}
               className="album"

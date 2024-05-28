@@ -3,15 +3,19 @@ import { InView } from "react-intersection-observer";
 
 interface SmoothInViewProps {
   children: ReactNode;
-  delay?: number;
   index?: number;
+  slow?: boolean;
 }
 
-function SmoothRender({ children, delay = 100, index = 0 }: SmoothInViewProps) {
-  if (screen.width > 640) {
-    delay = 300;
+function SmoothRender({ children, slow, index = 0 }: SmoothInViewProps) {
+  let renderDelay = 100;
+
+  if (slow && screen.width > 640) {
+    renderDelay = 300;
   }
-  const calculatedDelay = delay * index;
+
+  const calculatedDelay = renderDelay * index;
+
   return (
     <InView>
       {({ inView, ref }) => (

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { InstagramEmbed } from "react-social-media-embed";
 import homeImg from "../assets/homeimg1.jpg";
 import ButtonNav from "../components/ButtonNav";
@@ -7,9 +8,37 @@ import SmoothRender from "../components/SmoothRender";
 import Collage from "../components/Collage";
 
 function Home() {
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth > 640) {
+        const maxScroll = 100;
+        const scrollTop = window.scrollY;
+        const opacity = Math.max(1 - scrollTop / maxScroll, 0);
+        setScrollOpacity(opacity);
+      } else {
+        setScrollOpacity(1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
-      <div className="bg-gradient-to-b from-black via-[#0D1114] to-black h-screen">
+      {/* home image */}
+      <div
+        className="h-screen"
+        style={{
+          backgroundColor: `rgba(7,8,10, ${scrollOpacity})`,
+        }}
+      >
         <SmoothRender>
           <img
             src={homeImg}

@@ -1,9 +1,18 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 import SmoothRender from "./SmoothRender";
 
-function Collage() {
+function shuffleArray<T>(array: T[]): T[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+const Collage: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
+  const [shuffledIndexes, setShuffledIndexes] = useState<number[]>([]);
 
   useEffect(() => {
     const storage = getStorage();
@@ -12,7 +21,12 @@ function Collage() {
       const imageList = await listAll(imagesRef);
       const imagePromises = imageList.items.map((item) => getDownloadURL(item));
       const imageUrls = await Promise.all(imagePromises);
+
       setImages(imageUrls);
+
+      // Create an array of indexes and shuffle it
+      const indexes = Array.from({ length: imageUrls.length }, (_, i) => i);
+      setShuffledIndexes(shuffleArray(indexes));
     };
 
     fetchImages();
@@ -20,20 +34,19 @@ function Collage() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-        {images.map((image, index) => (
-          <SmoothRender index={index}>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        {shuffledIndexes.map((shuffledIndex) => (
+          <SmoothRender key={shuffledIndex} index={shuffledIndex}>
             <img
-              src={image}
-              alt={`CollageImage${index}`}
+              src={images[shuffledIndex]}
+              alt={`CollageImage${shuffledIndex}`}
               className="object-cover w-full h-48 sm:h-64"
-              key={index}
             />
           </SmoothRender>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Collage;

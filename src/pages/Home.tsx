@@ -10,11 +10,13 @@ function Home() {
   return (
     <div>
       <div className="bg-gradient-to-b from-black via-[#0D1114] to-black h-screen">
-        <img
-          src={homeImg}
-          alt="HomeImage"
-          className="object-cover mx-auto h-screen pt-36"
-        />
+        <SmoothRender>
+          <img
+            src={homeImg}
+            alt="HomeImage"
+            className="object-cover mx-auto h-screen pt-36"
+          />
+        </SmoothRender>
       </div>
 
       {/* main content */}

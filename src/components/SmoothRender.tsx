@@ -4,17 +4,15 @@ import { InView } from "react-intersection-observer";
 interface SmoothInViewProps {
   children: ReactNode;
   index?: number;
-  slow?: boolean;
+  delay?: number;
 }
 
-function SmoothRender({ children, slow, index = 0 }: SmoothInViewProps) {
-  let renderDelay = 100;
+function SmoothRender({ children, delay, index = 0 }: SmoothInViewProps) {
+  var renderDelay = 10;
 
-  if (slow && screen.width > 640) {
-    renderDelay = 300;
+  if (delay) {
+    renderDelay = delay * index;
   }
-
-  const calculatedDelay = renderDelay * index;
 
   return (
     <InView>
@@ -23,7 +21,7 @@ function SmoothRender({ children, slow, index = 0 }: SmoothInViewProps) {
           className={`transition-opacity duration-500 ease-in ${
             inView ? "opacity-100" : "opacity-0"
           }`}
-          style={{ transitionDelay: `${calculatedDelay}ms` }}
+          style={{ transitionDelay: `${renderDelay}ms` }}
           ref={ref}
         >
           {children}

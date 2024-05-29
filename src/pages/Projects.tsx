@@ -52,7 +52,7 @@ function Projects() {
 
       <div className="grid gap-4 sm:grid-cols-2 pt-4 md:pt-8 mx-auto lg:w-4/5 2xl:w-3/4">
         {projects.map((project, index) => (
-          <SmoothRender key={index} index={index} slow>
+          <SmoothRender key={index} index={index} delay={100}>
             <Link to={`/projects/${project.artist}`}>
               <div
                 key={index}

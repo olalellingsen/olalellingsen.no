@@ -37,7 +37,7 @@ function Event({
   return (
     <div
       className={` text-stone-200 p-4 rounded-lg shadow-xl ${
-        isPast ? "bg-primary/60" : "bg-primary"
+        isPast ? "bg-primary/70" : "bg-primary"
       }`}
     >
       <h3 className="flex justify-between">

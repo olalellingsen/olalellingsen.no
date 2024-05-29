@@ -43,13 +43,13 @@ function Home() {
           <img
             src={homeImg}
             alt="HomeImage"
-            className="object-cover mx-auto h-screen pt-36"
+            className="mx-auto object-cover h-screen pt-36"
           />
         </SmoothRender>
       </div>
 
       {/* main content */}
-      <div className="p-2 pt-8 pb-16 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-8 sm:gap-12">
+      <div className="p-2 pt-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-8 sm:gap-12">
         <SmoothRender>
           <Bio />
         </SmoothRender>

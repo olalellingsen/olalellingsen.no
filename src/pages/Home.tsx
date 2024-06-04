@@ -50,11 +50,11 @@ function Home() {
 
       {/* main content */}
       <div className="p-2 pt-8 mx-auto sm:w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 grid gap-8 sm:gap-12">
-        <SmoothRender>
+        <SmoothRender delay={500}>
           <Bio />
         </SmoothRender>
 
-        <SmoothRender>
+        <SmoothRender delay={500}>
           <SpotifyPlayer link="https://open.spotify.com/embed/artist/4NZ0fCPxiuIaEHw9kUgURe?utm_source=generator&theme=0" />
           <br />
           <div className="flex justify-center">
@@ -62,7 +62,7 @@ function Home() {
           </div>
         </SmoothRender>
 
-        <SmoothRender>
+        <SmoothRender delay={500}>
           <div className="hidden xs:block w-full">
             <InstagramEmbed url="https://www.instagram.com/olalellingsen/?next=%2Fdetnyensb%2F" />
           </div>

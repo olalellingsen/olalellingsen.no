@@ -284,7 +284,7 @@ function Calendar() {
       {showPast && (
         <div className="grid gap-4">
           {pastEvents.map((event) => (
-            <SmoothRender key={event.id}>
+            <SmoothRender key={event.id} delay={100}>
               <Event
                 {...event}
                 isPast={true}

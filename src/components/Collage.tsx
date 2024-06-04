@@ -35,11 +35,11 @@ const Collage: React.FC = () => {
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-        {shuffledIndexes.map((shuffledIndex) => (
-          <SmoothRender key={shuffledIndex} index={shuffledIndex}>
+        {shuffledIndexes.map((index) => (
+          <SmoothRender index={index} delay={200}>
             <img
-              src={images[shuffledIndex]}
-              alt={`CollageImage${shuffledIndex}`}
+              src={images[index]}
+              alt={`CollageImage${index}`}
               className="object-cover w-full h-48 sm:h-64"
             />
           </SmoothRender>

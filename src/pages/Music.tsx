@@ -209,7 +209,7 @@ function Music() {
       <h2>Albums</h2>
       <div className="grid gap-2 sm:grid-cols-2 sm:gap-4">
         {albums.map((album, index) => (
-          <SmoothRender key={album.id} index={index}>
+          <SmoothRender index={index} delay={300}>
             <iframe
               src={album.spotify}
               width="100%"
@@ -243,7 +243,7 @@ function Music() {
       <h2>Singles</h2>
       <div className="grid gap-2 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 2xl:grid-cols-4">
         {singles.map((single, index) => (
-          <SmoothRender key={single.id} index={index}>
+          <SmoothRender index={index} delay={50}>
             <iframe
               src={single.spotify}
               width="100%"

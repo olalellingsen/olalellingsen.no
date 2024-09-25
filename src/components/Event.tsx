@@ -4,12 +4,12 @@ import { MapPin } from "lucide-react";
 import { Ticket } from "lucide-react";
 import { Pencil, Trash } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { Timestamp } from "firebase/firestore";
 
 export interface EventProps {
   id: string;
   band?: string;
-  date?: string;
-  time?: string;
+  date: Timestamp;
   venue?: string;
   venueLink?: string;
   ticketLink?: string;
@@ -23,7 +23,6 @@ function Event({
   id,
   band,
   date,
-  time,
   venue,
   venueLink,
   description,
@@ -57,18 +56,22 @@ function Event({
         <div className="flex flex-wrap gap-4">
           <div className="flex gap-1">
             <Calendar strokeWidth={1} />
-            {date}
+            {date.toDate().toLocaleDateString()}
           </div>
           {!isPast && (
             <div className="flex gap-1">
               <Clock strokeWidth={1} />
-              {time === "00:00" ? "TBA" : time}
+              {date.toDate().toLocaleTimeString() === "00:00:00"
+                ? "TBA"
+                : date.toDate().toLocaleTimeString().slice(0, 5)}
             </div>
           )}
           <div className="flex gap-1">
             <MapPin strokeWidth={1} />
             <a
-              className={venueLink !== undefined ? "underline" : ""}
+              className={
+                venueLink !== undefined ? "underline hover:no-underline" : ""
+              }
               href={venueLink}
               target="_blank"
             >
@@ -79,7 +82,11 @@ function Event({
           {ticketLink !== undefined && ticketLink !== "" && !isPast && (
             <div className="flex gap-1">
               <Ticket strokeWidth={1} />
-              <a className="underline" href={ticketLink} target="_blank">
+              <a
+                className="underline hover:no-underline"
+                href={ticketLink}
+                target="_blank"
+              >
                 Tickets
               </a>
             </div>

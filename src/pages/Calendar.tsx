@@ -18,7 +18,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog"; // Import the
 function Calendar() {
   const { isSignedIn } = useAuth();
 
-  const [eventData, setEventData] = useState<DocumentData[]>([]);
+  const [eventData, setEventData] = useState<EventProps[]>([]);
   const [upcomingEvents, setUpcomingEvents] = useState<EventProps[]>([]);
   const [pastEvents, setPastEvents] = useState<EventProps[]>([]);
   const [showPast, setShowPast] = useState(false);
@@ -46,7 +46,7 @@ function Calendar() {
         const concertData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as DocumentData[];
+        })) as EventProps[];
         setEventData(concertData);
       } catch (error) {
         console.error(
@@ -69,7 +69,7 @@ function Calendar() {
     const allEvents = eventData.map((event) => ({
       id: event.id,
       band: event.band,
-      date: event.date.toDate(), // Convert Firestore Timestamp to JavaScript Date object
+      date: event.date,
       venue: event.venue,
       venueLink: event.venueLink,
       ticketLink: event.ticketLink,
@@ -77,26 +77,26 @@ function Calendar() {
     }));
 
     const upcomingEventsData = allEvents.filter(
-      (event) => event.date > currentDate
+      (event) => event.date.toDate() > currentDate
     );
     const pastEventsData = allEvents.filter(
-      (event) => event.date <= currentDate
+      (event) => event.date.toDate() <= currentDate
     );
 
     // Sort upcoming events by date in ascending order
     const sortedUpcomingEventsData = upcomingEventsData.sort((a, b) => {
-      return a.date.getTime() - b.date.getTime(); // Compare timestamps
+      return a.date.toDate().getTime() - b.date.toDate().getTime(); // Compare timestamps
     });
 
     // Sort past events by date in descending order
     const sortedPastEventsData = pastEventsData.sort((a, b) => {
-      return b.date.getTime() - a.date.getTime(); // Compare timestamps
+      return b.date.toDate().getTime() - a.date.toDate().getTime(); // Compare timestamps
     });
 
     const formattedUpcomingEvents = sortedUpcomingEventsData.map((event) => ({
       ...event,
-      date: event.date.toLocaleDateString(),
-      time: event.date.toLocaleTimeString([], {
+      formattedDate: event.date.toDate().toLocaleDateString(),
+      time: event.date.toDate().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
@@ -104,8 +104,8 @@ function Calendar() {
 
     const formattedPastEvents = sortedPastEventsData.map((event) => ({
       ...event,
-      date: event.date.toLocaleDateString(),
-      time: event.date.toLocaleTimeString([], {
+      formattedDate: event.date.toDate().toLocaleDateString(),
+      time: event.date.toDate().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
@@ -159,7 +159,7 @@ function Calendar() {
       const concertData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      })) as DocumentData[];
+      })) as EventProps[];
       setEventData(concertData);
 
       console.log("Concert added/updated successfully!");
@@ -172,14 +172,14 @@ function Calendar() {
   const handleEditEvent = (id: string) => {
     const eventToEdit = eventData.find((event) => event.id === id);
     if (eventToEdit) {
-      setBand(eventToEdit.band);
+      setBand(eventToEdit.band || "");
       setDate(eventToEdit.date.toDate().toISOString().split("T")[0]); // Set date in YYYY-MM-DD format
       setTime(
         eventToEdit.date.toDate().toISOString().split("T")[1].slice(0, 5)
       ); // Set time in HH:MM format
-      setVenue(eventToEdit.venue);
-      setVenueLink(eventToEdit.venueLink);
-      setTicketLink(eventToEdit.ticketLink);
+      setVenue(eventToEdit.venue || "");
+      setVenueLink(eventToEdit.venueLink || "");
+      setTicketLink(eventToEdit.ticketLink || "");
       setIsEditing(true);
       setEditEventId(id);
     }

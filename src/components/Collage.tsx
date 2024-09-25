@@ -38,6 +38,7 @@ const Collage: React.FC = () => {
         {shuffledIndexes.map((index) => (
           <SmoothRender index={index} delay={200}>
             <img
+              key={index}
               src={images[index]}
               alt={`CollageImage${index}`}
               className="object-cover w-full h-48 sm:h-64"

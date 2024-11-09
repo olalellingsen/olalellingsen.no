@@ -35,11 +35,11 @@ function Event({
 
   return (
     <div
-      className={` text-stone-200 p-4 rounded-lg shadow-xl ${
-        isPast ? "bg-primary/70" : "bg-primary"
+      className={`p-1 sm:pt-4 border-b border-primary ${
+        isPast && "text-stone-500"
       }`}
     >
-      <h3 className="flex justify-between">
+      <h2 className="flex justify-between py-2">
         {band}
         {isSignedIn && (
           <div className="flex gap-2">
@@ -51,48 +51,46 @@ function Event({
             </button>
           </div>
         )}
-      </h3>
-      <div className="grid gap-4">
-        <div className="flex flex-wrap gap-4">
-          <div className="flex gap-1">
-            <Calendar strokeWidth={1} />
-            {date.toDate().toLocaleDateString()}
+      </h2>
+
+      {/* Details */}
+      <div className="grid sm:flex flex-wrap gap-1 sm:gap-6 p-1 sm:text-lg">
+        <div className="flex gap-1 my-1">
+          <Calendar strokeWidth={1} />
+          {date.toDate().toLocaleDateString("no-NO", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}
+        </div>
+        {!isPast && (
+          <div className="flex gap-1 my-1">
+            <Clock strokeWidth={1} />
+            {date.toDate().toLocaleTimeString() === "00:00:00"
+              ? "TBA"
+              : date.toDate().toLocaleTimeString().slice(0, 5)}
           </div>
-          {!isPast && (
-            <div className="flex gap-1">
-              <Clock strokeWidth={1} />
-              {date.toDate().toLocaleTimeString() === "00:00:00"
-                ? "TBA"
-                : date.toDate().toLocaleTimeString().slice(0, 5)}
-            </div>
-          )}
-          <div className="flex gap-1">
-            <MapPin strokeWidth={1} />
-            <a
-              className={
-                venueLink !== undefined ? "underline hover:no-underline" : ""
-              }
-              href={venueLink}
-              target="_blank"
-            >
-              {venue}
+        )}
+        <div className="flex gap-1 my-1">
+          <MapPin strokeWidth={1} />
+          <a
+            className={
+              venueLink !== undefined ? "underline hover:no-underline" : ""
+            }
+            href={venueLink}
+            target="_blank"
+          >
+            {venue}
+          </a>
+        </div>
+
+        {ticketLink !== undefined && ticketLink !== "" && !isPast && (
+          <div>
+            <a href={ticketLink} target="_blank">
+              <button className="ticketButton w-max">Tickets</button>
             </a>
           </div>
-
-          {ticketLink !== undefined && ticketLink !== "" && !isPast && (
-            <div className="flex gap-1">
-              <Ticket strokeWidth={1} />
-              <a
-                className="underline hover:no-underline"
-                href={ticketLink}
-                target="_blank"
-              >
-                Tickets
-              </a>
-            </div>
-          )}
-          {description !== "" && <p>{description}</p>}
-        </div>
+        )}
       </div>
     </div>
   );

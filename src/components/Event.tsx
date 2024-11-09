@@ -1,7 +1,6 @@
 import { Calendar } from "lucide-react";
 import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
-import { Ticket } from "lucide-react";
 import { Pencil, Trash } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Timestamp } from "firebase/firestore";
@@ -25,7 +24,6 @@ function Event({
   date,
   venue,
   venueLink,
-  description,
   ticketLink,
   isPast,
   onEdit,
@@ -85,7 +83,7 @@ function Event({
         </div>
 
         {ticketLink !== undefined && ticketLink !== "" && !isPast && (
-          <div>
+          <div className="p-2 sm:p-0">
             <a href={ticketLink} target="_blank">
               <button className="ticketButton w-max">Tickets</button>
             </a>
